@@ -73,3 +73,19 @@ a {
 #navbar ul li:last-child {
     background:url("../img/settingsNotSelect.png") no-repeat;
 }
+
+#home {
+background-color: #faa3b8;
+}
+
+#favourite {
+background-color: #fee3a1;
+}
+
+#settings {
+background-color: #82a882;
+}
+
+#search {
+background-color: #91def0;
+}
