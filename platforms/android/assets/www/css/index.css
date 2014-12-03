@@ -28,12 +28,7 @@ h1 {
     position:fixed;
     width:100%;
     bottom:0;
-	height: 40px;
-}
-
-#navbar ul li { 
-height: 40px;
-}
+} 
 
 #navbar ul {
     display:inline;
@@ -55,7 +50,6 @@ a[data-role=pagelink] {
 
 .activetab {
     background-color:blue;
-	height: 40px;
 }
 
 a {
@@ -64,36 +58,20 @@ a {
     color:black;
 }
 
-#navbar ul li:first-child .activetab {
-    background:url("../img/homeSelect.png") no-repeat center;
-}
-
-#navbar ul li:nth-child(2) .activetab {
-    background:url("../img/favouriteSelect.png") no-repeat center;
-}
-
-#navbar ul li:nth-child(3) .activetab {
-    background:url("../img/searchSelect.png") no-repeat center;
-}
-
-#navbar ul li:last-child .activetab {
-    background:url("../img/settingsSelect.png") no-repeat center;
-}
-
 #navbar ul li:first-child {
-    background:url("../img/homeNotSelect.png") no-repeat center;
+    background:url("../img/homeNotSelect.png") no-repeat;
 }
 
 #navbar ul li:nth-child(2) {
-    background:url("../img/favouriteNotSelect.png") no-repeat center;
+    background:url("../img/favouriteNotSelect.png") no-repeat;
 }
 
 #navbar ul li:nth-child(3) {
-    background:url("../img/searchNotSelect.png") no-repeat center;
+    background:url("../img/searchNotSelect.png") no-repeat;
 }
 
 #navbar ul li:last-child {
-    background:url("../img/settingsNotSelect.png") no-repeat center;
+    background:url("../img/settingsNotSelect.png") no-repeat;
 }
 
 #home {
@@ -104,10 +82,3 @@ background-color: #faa3b8;
 background-color: #fee3a1;
 }
 
-#settings {
-background-color: #82a882;
-}
-
-#search {
-background-color: #91def0;
-}
