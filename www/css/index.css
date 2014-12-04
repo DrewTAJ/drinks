@@ -158,3 +158,8 @@ width: 90%;
 padding-top: 20px;
 padding-bottom: 20px;
 }
+
+nav h2 {
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+margin-left: 30%;
+}
