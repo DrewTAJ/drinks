@@ -4,6 +4,7 @@
 
 body {
     margin:0px;
+	font-size: 30px;
 }
 
 h1 {
@@ -64,6 +65,12 @@ a {
     color:black;
 }
 
+#navbar {
+background-color: whitesmoke;
+padding-top: 20px;
+padding-bottom: 10px;
+}
+
 #navbar ul li:first-child .activetab {
     background:url("../img/homeSelect.png") no-repeat center;
 }
@@ -98,16 +105,56 @@ a {
 
 #home {
 background-color: #faa3b8;
+height: 100%;
+padding-bottom: 75%;
 }
 
 #favourite {
 background-color: #fee3a1;
+height: 100%;
+padding-bottom: 100%;
 }
 
 #settings {
 background-color: #82a882;
+height: 100%;
+padding-bottom: 130%;
 }
 
 #search {
 background-color: #91def0;
+height: 100%;
+padding-bottom: 90%;
+}
+
+.searchTxt {
+border-radius: 10px;
+height: 60px;
+width: 90%;
+margin-left: 5%;
+margin-top: 5%;
+}
+
+ul {
+list-style-type: none;
+}
+
+#search_results ul li {
+border-bottom: 4px solid black;
+width: 90%;
+padding-top: 20px;
+padding-bottom: 20px;
+}
+
+#home a {
+padding-top: 20px;
+padding-bottom: 20px;
+margin-left: 4px;
+}
+
+#favourite ul li {
+border-bottom: 4px solid black;
+width: 90%;
+padding-top: 20px;
+padding-bottom: 20px;
 }
