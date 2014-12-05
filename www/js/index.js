@@ -25,7 +25,12 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         for (var i = 0; i < numLinks; i++) {
-            links[i].addEventListener("touchend", Toucher, false);
+            if(detectTouchSupport()) {
+                links[i].addEventListener("touchend", Toucher, false);
+            } else {
+                links[i].addEventListener("click", Toucher, false);
+            }
+            
         }        
     },
     // deviceready Event Handler
@@ -85,4 +90,10 @@ function show(page) {
 
 function hide(page) {
     page.className = "inactive";
+}
+
+function detectTouchSupport( ){
+  msGesture = navigator && navigator.msPointerEnabled && navigator.msMaxTouchPoints > 0 && MSGesture;
+  touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
+  return touchSupport;
 }
