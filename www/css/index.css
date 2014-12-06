@@ -16,6 +16,10 @@ h1 {
     text-align:center;
 }
 
+#wrapper section {
+    padding-top:110px;
+    padding-bottom:10px;
+}
 
 .active {
     display: block;
@@ -25,11 +29,64 @@ h1 {
     display:none;
 }
 
+.off {
+    display:none;
+}
+
+.on {
+    display:block;
+}
+
+
+/****************************
+        Header
+****************************/
+#header div  {
+    float:left;
+    clear:none;
+    width:25%;
+}
+
+#header div:nth-child(2) {
+    width:50%;
+}
+
+#header div:last-child {
+    height: 100px;
+}
+
+#header div:last-child div {
+    height: auto;
+} 
+
+#header {
+    overflow:auto;
+    position: fixed;
+    width:100%;
+    top:0;
+    background-color: brown;
+}
+
+
+#favourite_button {
+    background: url("../img/favouriteNotSelect.png") no-repeat center;
+}
+
+#favourited_button {
+    background:url("../img/favouriteSelect.png") no-repeat center;
+}
+
+#filter_button {
+    background:url("../img/searchNotSelect.png") no-repeat center;
+}
+/****************************
+        Navbar menu
+****************************/
 #navbar {
     position:fixed;
     width:100%;
     bottom:0;
-	height: 40px;
+    height: 40px;
 }
 
 #navbar ul li { 
@@ -47,7 +104,7 @@ height: 40px;
     clear:none;
     list-style: none;
     text-align: center;
-    background-color: red;
+/*    background-color: red;*/
 }
 
 a[data-role=pagelink] {
@@ -55,8 +112,8 @@ a[data-role=pagelink] {
 }
 
 .activetab {
-    background-color:blue;
-	height: 40px;
+    /*background-color:blue;*/
+    height: 40px;
 }
 
 a {
@@ -89,83 +146,115 @@ padding-bottom: 10px;
 
 #navbar ul li:first-child {
     background:url("../img/homeNotSelect.png") no-repeat center;
-	border-right: 1px solid black;
+    border-right: 1px solid black;
 }
 
 #navbar ul li:nth-child(2) {
     background:url("../img/favouriteNotSelect.png") no-repeat center;
-	border-right: 1px solid black;
-	
+    border-right: 1px solid black;
+    
 }
 
 #navbar ul li:nth-child(3) {
     background:url("../img/searchNotSelect.png") no-repeat center;
-	border-right: 1px solid black;
-	
+    border-right: 1px solid black;
+    
 }
 
 #navbar ul li:last-child {
     background:url("../img/settingsNotSelect.png") no-repeat center;
-	
+    
 }
-
+/****************************
+        Home Page
+****************************/
 #home {
-background-color: #faa3b8;
-height: 100%;
-padding-bottom: 75%;
+    background-color: #faa3b8;
+    height: 100%;
+    /*padding-bottom: 75%;*/
 }
-
+#home a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 4px;
+    text-align: center;
+}
+/****************************
+        Favourites Page
+****************************/
 #favourite {
-background-color: #fee3a1;
-height: 100%;
-padding-bottom: 100%;
+    background-color: #fee3a1;
+    height: 100%;
+    /*padding-bottom: 100%;*/
 }
-
-#settings {
-background-color: #82a882;
-height: 100%;
-padding-bottom: 130%;
+#favourite ul li {
+    border-bottom: 4px solid black;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-
+/****************************
+        Search Page
+****************************/
 #search {
-background-color: #91def0;
-height: 100%;
-padding-bottom: 90%;
-}
+    background-color: #91def0;
+    height: 100%;
+    /*padding-bottom: 90%;*/
 
+}
 .searchTxt {
-border-radius: 10px;
-height: 60px;
-width: 90%;
-margin-left: 5%;
-margin-top: 5%;
+    border-radius: 10px;
+    height: 60px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
 }
 
 ul {
-list-style-type: none;
+    list-style-type: none;
 }
 
 #search_results ul li {
-border-bottom: 4px solid black;
-width: 90%;
-padding-top: 20px;
-padding-bottom: 20px;
+    border-bottom: 4px solid black;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-#home a {
-padding-top: 20px;
-padding-bottom: 20px;
-margin-left: 4px;
+/****************************
+        Settings Page
+****************************/
+#settings {
+    background-color: #82a882;
+    height: 100%;
+    overflow:auto;
+    /*padding-bottom: 130%;*/
 }
 
-#favourite ul li {
-border-bottom: 4px solid black;
-width: 90%;
-padding-top: 20px;
-padding-bottom: 20px;
+#settings a {
+    float:left;
+    clear: left;
+}
+/*****************************
+        Drink Page
+******************************/
+#drink_display img {
+    width:10%;
 }
 
+/*****************************
+        Fonts
+*****************************/
 nav h2 {
-font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-margin-left: 30%;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    margin-left: 30%;
+}
+
+@media all and (max-width:450px) {
+/****************************
+        Header
+****************************/
+    #header_title {
+        font-size: 30px
+    }
 }

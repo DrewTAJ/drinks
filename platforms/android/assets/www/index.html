@@ -10,20 +10,30 @@
     </head>
     <body>
         <div class="wrapper">
-            <nav>
-                <div id="header_button_1"></div>
-                <h2>Make a drink</h2>
-                <div id="header_button_2" class="favourite_button"></div>
+            <nav id="header">
+                <div id="back_button">
+                    <a href="#home" data-role="pagelink"><</a>
+                </div>
+                <div>
+                    <h2 id="header_title">Home</h2>
+                </div>    
+                <div id="header2" class="favourite_button">
+                    <div id="favourite_button" class="on"></div>
+                    <div id="favourited_button" class="off"></diV>
+                    <div id="filter_button" class="off"></div>
+                </div>
             </nav>               
             <section id="home" class="active" data-role="page">           
-                <p>Yes your honor, this man has no dick.</p>
-                <p>Yes your honor we have a problem there are 3 million miserable assholes in the tri-state area.</p>
-                <a href="#drink_selection" data-role="pagelink">Random Drink</a>
+                <a href="#drink_selection" data-role="pagelink">My Drinks</a>
+                <a href="#drink_display" data-role="pagelink">Random Drink</a>
                 <a href="#drink_selection" data-role="pagelink">Strong Drinks</a>
                 <a href="#drink_selection" data-role="pagelink">Medium Drinks</a>
-                <a href="#drink_selection" data-role="pagelink">Alcohol Free Drinks</a>
+                <a href="#drink_selection" data-role="pagelink">Non-Alcholoic Drinks</a>
                 <a href="#drink_selection" data-role="pagelink">Exotic Drinks </a>
-                <p>Please Drink Responsibly </p>
+                <footer>
+                    <p>Please Drink Responsibly</p>
+                </footer>
+                
             </section>
             <section id="favourite" class="inactive" data-role="page">               
                 <ul>
@@ -40,9 +50,9 @@
                 <a>About</a>
             </section>
             <section id="drink_display" class="inactive" data-role="page">
-                <img/>
+                <img src="img/drink_images/Chief_500.jpg"/>
                 <div id="recipe">
-                    <ul>
+                    <ul id="ingredients">
                         <li>2 Parts Midori Liqueur</li>
                         <li>1 part Jack Daniels</li>
                         <li>1 Part Jagers</li>
@@ -92,7 +102,9 @@
                 </ul>
             </nav>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!--
+        <script type="text/javascript" src="cordova.js"></script>-->
+        <script type="text/javascript" src="js/drinks.json"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

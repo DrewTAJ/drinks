@@ -1,0 +1,118 @@
+var drinkindex = { "Category" : [
+	{
+		"title" : "Strong",
+		"Drinks" :[
+			{
+				"Name" : "Master Chief", 
+				"picture" : "img/drink_images/Chief_500.jpg",
+				"ingredients" : [
+					{
+						"Name" : "Midori Liqueur",
+						"Quantity" : "2 Parts"
+					},
+					{
+						"Name" : "Jack Daniels",
+						"Quantity" : "1 Part"
+					},
+					{
+						"Name" : "Jagers",
+						"Quantity" : "1 Part"
+					},
+					{
+						"Name" : "Lemon Lime Soda",
+						"Quantity" : null
+					},
+					{
+						"Name" : "Concentrated Blue and Orange colored flavors and Mango Pure (Orange and Blue Mio)",
+						"Quantity" : null
+					}
+				],
+				"recipe" : ["Pour 2 parts Midori over ice in a hefty lowball glass.","In a shaker mix Jack, Jager, a slapsh of Midore, small squeeze blue flavor (Mio) and a dash of Mango Puree.","Float Mixture on Midori.","Lightly add Lemon lime soda to top of glass and finish witha squeeze of orange flavoring (Mio)."],
+				"description" : "Soldiers aren't machines they're just people. So lighten up and have a drink! Welcome home."
+			},
+			{
+				"Name": "Cortana",
+				"picture" : "img/drink_images/Cortana.jpg",
+				"ingredients" : [
+					{
+						"Name" : "Midori Liqueur",
+						"Quantity" : "2 Parts"
+					},
+					{
+						"Name" : "Jack Daniels",
+						"Quantity" : "1 Part"
+					},
+					{
+						"Name" : "Jagers",
+						"Quantity" : "1 Part"
+					},
+					{
+						"Name" : "Lemon Lime Soda",
+						"Quantity" : null
+					},
+					{
+						"Name" : "Concentrated Blue and Orange colored flavors and Mango Pure (Orange and Blue Mio)",
+						"Quantity" : null
+					}
+				],
+				"recipe" : ["Pour 2 parts Midori over ice in a hefty lowball glass.","In a shaker mix Jack, Jager, a slapsh of Midore, small squeeze blue flavor (Mio) and a dash of Mango Puree.","Float Mixture on Midori.","Lightly add Lemon lime soda to top of glass and finish witha squeeze of orange flavoring (Mio)."],
+				"description" : "Soldiers aren't machines they're just people. So lighten up and have a drink! Welcome home."		
+			},
+			{
+				"Name": "White Russian",
+				"picture" : "img/drink_images/white-russian-verkleinert.jpg", 
+				"ingredients" : [
+					{
+						"Name" : "Vodka",
+						"Quantity": null
+					},
+					{
+						"Name" : "Milk",
+						"Quantity" : null
+					}
+					
+				],
+				"recipe" : ["Mix Stuff"],
+				"description": "Straight from The Big Lebowski its a white russian cocktail (not a person)." 
+			},
+			{
+				"Name" : "Gin and Tonic",
+				"picture" : "",
+				"ingreditens" : [
+					{
+						"Name" : "Gin",
+						"Quantity": null
+					},
+					{
+						"Name" : "Tonic",
+						"Quantityy" : null
+					}
+				],
+				"recipe" : ["Mix them","Drink it"],
+				"description" : "The single greatest drink of all time"
+			},
+		]
+	},
+	{
+		"title" : "Medium",
+		"Drinks" : []
+	},
+	{
+		"title" : "Non-Alcoholic",
+		"Drinks" : [
+			{
+				"Name" : "Virgin Cuba Librae",
+				"picture" : "null",
+				"ingredients" : {
+
+				},
+				"recipe" : [],
+				"description": "" 
+			}
+		]
+	},
+	{
+		"title" : "Exotic",
+		"Drinks" : []
+	}
+]};
