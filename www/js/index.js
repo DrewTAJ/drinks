@@ -66,7 +66,7 @@ function loadPage(pagename, idder) {
     }
     if (Screens[Screens.length - 1] != pagename) {
         Screens.push(pagename);
-        //Saves the history of the screens viewed in the Screens array
+        //Saves the history of the screens viewed in the Screens array                                           
     }
 
     if(pagename == "drink_selection") {
@@ -84,7 +84,7 @@ function loadPage(pagename, idder) {
             case "Medium":
                 k = 1;
                 break;
-            case "Non-Alcoholic"
+            case "Non-Alcoholic":
                 k = 2;
                 break;
             case "Exotic":

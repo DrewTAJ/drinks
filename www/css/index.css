@@ -5,6 +5,7 @@
 body {
     margin:0px;
 	font-size: 30px;
+    background-color:#91def0;
 }
 
 h1 {
@@ -16,9 +17,8 @@ h1 {
     text-align:center;
 }
 
-#wrapper section {
-    padding-top:110px;
-    padding-bottom:10px;
+.wrapper section {
+    padding-top:36px;
 }
 
 .active {
@@ -52,7 +52,7 @@ h1 {
 }
 
 #header div:last-child {
-    height: 100px;
+    height: 0px;
 }
 
 #header div:last-child div {
@@ -67,6 +67,16 @@ h1 {
     background-color: brown;
 }
 
+#header_title {
+    margin:0;
+    padding-top:3px;
+    text-align: center;
+    display:block;
+}
+
+#back_button a {
+    text-align: center;
+}
 
 #favourite_button {
     background: url("../img/favouriteNotSelect.png") no-repeat center;
@@ -89,24 +99,24 @@ h1 {
     height: 40px;
 }
 
-#navbar ul li { 
-height: 40px;
-}
-
 #navbar ul {
     display:inline;
     padding:0;
 }
 
-#navbar ul li {
+#navbar ul li { 
+    height: 40px;
     width:24%;
     float:left;
     clear:none;
     list-style: none;
     text-align: center;
-/*    background-color: red;*/
+/*    background-color: red;*/    
 }
 
+#navbar ul li a {
+    padding-top:20px;
+}
 a[data-role=pagelink] {
     display:block;
 }
@@ -123,12 +133,12 @@ a {
 }
 
 #navbar {
-background-color: #e5e5e5;
-padding-top: 20px;
-padding-bottom: 10px;
+    background-color: #e5e5e5;
+/*    padding-top: 20px;*/    
+    /*padding-bottom: 10px;*/
 }
 
-#navbar ul li:first-child .activetab {
+/*#navbar ul li:first-child .activetab {
     background:url("../img/homeSelect.png") no-repeat center;
 }
 
@@ -136,33 +146,38 @@ padding-bottom: 10px;
     background:url("../img/favouriteSelect.png") no-repeat center;
 }
 
-#navbar ul li:nth-child(3) .activetab {
+#navbar ul li:nth-child(3) < .activetab {
     background:url("../img/searchSelect.png") no-repeat center;
 }
 
 #navbar ul li:last-child .activetab {
     background:url("../img/settingsSelect.png") no-repeat center;
-}
+}*/
 
 #navbar ul li:first-child {
-    background:url("../img/homeNotSelect.png") no-repeat center;
+    background:url("../img/homeNotSelect.png") no-repeat 50% 0;
+    background-size:35%, 35%;
     border-right: 1px solid black;
 }
 
 #navbar ul li:nth-child(2) {
-    background:url("../img/favouriteNotSelect.png") no-repeat center;
+    background:url("../img/favouriteNotSelect.png") no-repeat 50% 0;
     border-right: 1px solid black;
-    
+    background-size:35%, 35%;
 }
 
 #navbar ul li:nth-child(3) {
-    background:url("../img/searchNotSelect.png") no-repeat center;
+    background:url("../img/searchNotSelect.png") no-repeat 50% 0;
     border-right: 1px solid black;
-    
+    background-size:35%, 35%;
 }
 
 #navbar ul li:last-child {
-    background:url("../img/settingsNotSelect.png") no-repeat center;
+    background:url("../img/settingsNotSelect.png") no-repeat 50% 0;
+    background-size:35%, 35%;
+}
+
+#navbar ul li {
     
 }
 /****************************
@@ -257,4 +272,10 @@ nav h2 {
     #header_title {
         font-size: 30px
     }
+/****************************
+        Navbar menu
+****************************/
+    #navbar ul li a {
+        font-size: 20px;
+    }    
 }
