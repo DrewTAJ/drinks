@@ -10,6 +10,7 @@ var inner_text;
 var app = {
     // Application Constructor
     initialize: function() {
+
         pages = document.querySelectorAll("[data-role=page]");
         links = document.querySelectorAll("[data-role=pagelink]");
         
@@ -25,23 +26,39 @@ var app = {
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+    bindEvents: function() {     
         for (var i = 0; i < numLinks; i++) {
             if(detectTouchSupport()) {
                 links[i].addEventListener("touchend", Toucher, false);
             } else {
                 links[i].addEventListener("click", Toucher, false);
-            }
-            
+            }           
         }        
+        if(detectTouchSupport()) {
+            document.querySelector("#drink_ingredients_add").addEventListener("touchend",addInput,false);
+            document.querySelector("#drink_step_add").addEventListener("touched",addInput,false);
+            document.querySelector("#custom_drink_save").addEventListener("touchend",saveDrink,false);
+            document.querySelector("#drink_image_input").addEventListener("touchend",getImage,false);
+        } else {
+            document.querySelector("#drink_ingredients_add").addEventListener("click",addInput,false);
+            document.querySelector("#drink_step_add").addEventListener("click",addInput,false);
+            document.querySelector("#custom_drink_save").addEventListener("click",saveDrink,false);
+        }
+
+        if(detectTouchSupport()) {
+            document.addEventListener('deviceready', this.onDeviceReady, false);
+        } else {
+            this.onDeviceReady();   
+        }
+
     },
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        
+//        alert(document.querySelector("body").offsetWidth);
+        console.log(document.querySelector("body").offsetWidth);
     },
     // Update DOM on a Received Event
 };
@@ -73,10 +90,10 @@ function loadPage(pagename, idder) {
         console.log("bullshit "+pagename)
         var lister = document.querySelector("#"+pagename+" ul");
         // console.log("BEFORE JSON PARSIG");
-        // var drinksjson = JSON.parse(drinkindex);
-        var k;
+        // var drinksjson = JSON.parse("drinks.json");
+        // var k;
         // console.log(drinksjson);
-        // console.log("Before FOR LOOP");
+        console.log("Before FOR LOOP");
         switch(idder) {
             case "Strong":
                 k = 0;
@@ -152,8 +169,113 @@ function loadPage(pagename, idder) {
     console.log(header_title.innerHTML+" title");
     var atr = '[href="#'+pagename+'"]';
     console.log(atr);
-    document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
+    if(pagename == "home") {
+        document.querySelector("#home_button").className = "activetab";
+    } else  {
+        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
+    }
 }
+
+function addInput(ev) {
+    ev.preventDefault();
+
+    if(ev.currentTarget.id == "drink_ingredients_add") {
+        var quantity_div = document.getElementById("drink_ingredients_quantity");
+        var name_div = document.getElementById("drink_ingredients_name");
+
+        var ingredient_quantity = document.createElement("input");
+        ingredient_quantity.id = "drink_ingredients_name_input";
+        ingredient_quantity.setAttribute("type","text");
+        ingredient_quantity.setAttribute("placeholder","leave blank if none")
+
+        var ingredient_name = document.createElement("input")
+        ingredient_name.id = "drink_ingredients_quantity_input";
+        ingredient_quantity.setAttribute("type","text");
+        ingredient_quantity.setAttribute("plceholder","Ingredient");
+
+        quantity_div.appendChild(ingredient_quantity);
+        name_div.appendChild(ingredient_name);
+    } else {
+        var recipe_div = document.getElementById("drink_recipe");
+
+        var recipe_step = document.createElement("input");
+        recipe_step.id = "drink_recipe_input";
+        recipe_step.setAttribute("type","text");
+        recipe_step.setAttribute("placeholder","recipe step");
+
+        recipe_div.appendChild(recipe_step);
+    }
+}
+
+function saveDrink(ev) {
+    ev.preventDefault();
+
+    var drink_name = document.querySelector("#drink_name_input");
+    var drink_image = document.querySelector("#drink_image_input");
+    var drink_description = document.querySelector("#drink_description_input");
+    var drink_ingredient_name = document.querySelectorAll("#drink_ingredients_quantity_input");
+    var drink_ingredient_quantity = document.querySelectorAll("#drink_ingredients_name_input");
+    var drink_recipe_steps = document.querySelectorAll("#drink_recipe_input");
+
+    var drink_quant_count = 0;
+    var drink_name_count = 0;
+    var drink_recipe_count = 0
+
+    for(var i = 0; i < drink_ingredient_name.length; i++) {
+        if(drink_ingredient_name[i].value != "") {
+            drink_name_count++;
+        } 
+    }
+
+    for(var i = 0; i < drink_recipe_steps; i++) {
+        if(drink_recipe_steps[i].value != "") {
+            drink_recipe_count++;
+        }
+    }
+
+    if(drink_name_count == drink_ingredient_name.length && drink_name.value != "" && drink_recipe_count == drink_recipe_steps.length) {
+        var custom_drink_pojo = {
+            "title" : drink_name,
+            "picture" : null,
+            "ingredients" : [],
+            "recipe" : [],
+            "description" : drink_description.value
+        };
+
+        for(var i = 0; i < drink_ingredient_name.length; i++) {
+            if(drink_ingredient_quantity[i].value == "") {
+                var pushable = {"Name" : drink_ingredient_name[i].value, "Quantity" : null}
+            } else {
+                var pushable = {"Name" : drink_ingredient_name[i].value, "Quantity" : drink_ingredient_quantity[i].value}
+            }
+            custom_drink_pojo.ingredients.push(pushable);
+        }
+
+        for(var i = 0; i < drink_recipe_steps.length; i++) {
+            var pushable = drink_recipe_steps.value;
+
+            custom_drink_pojo.recipe.push(pushable);
+        }
+
+    } else {
+        alert("Please fill out all necessary form fields accordingly")
+    }
+
+}
+
+function getImage(ev) {
+    ev.preventDefault();
+    console.log("IMAGE");
+    // navigator.camera.getPicture( cameraSuccess, cameraError);
+}
+
+// function cameraSuccess(imageURI) {
+
+// }
+
+// function cameraError(error) {
+//     alert("Error Code: "+error);
+// }
 
 function show(page) {
     page.className = "active";

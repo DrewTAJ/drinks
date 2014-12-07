@@ -12,7 +12,7 @@
         <div class="wrapper">
             <nav id="header">
                 <div id="back_button">
-                    <a href="#home" data-role="pagelink"><</a>
+                    <a class=".off" href="#home" data-role="pagelink"><</a>
                 </div>
                 <div>
                     <h2 id="header_title">Home</h2>
@@ -23,7 +23,7 @@
                     <div id="filter_button" class="off"></div>
                 </div>
             </nav>               
-            <section id="home" class="active" data-role="page">           
+            <section id="home" class="inactive" data-role="page">           
                 <a id="My" href="#drink_selection" data-role="pagelink">My Drinks</a>
                 <a href="#drink_display" data-role="pagelink">Random Drink</a>
                 <a id="Strong" href="#drink_selection" data-role="pagelink">Strong Drinks</a>
@@ -77,10 +77,36 @@
                     </ul>                    
                 </div>
             </section>
-            <section id="custom_drink" class="inactive" data-role="page">
-                <form>
-                    <input type="text"/>
-                    <input type="text"/>
+            <section id="custom_drink" class="active" data-role="page">
+                <form id="custom_drink_form">
+                    <div id="drink_name">
+                        <label id="drink_name_label" for="drink_name_input">Name</label>
+                        <input id="drink_name_input" type="text" placeholder="Drink Name"/>
+                    </div>
+                    <div id="drink_image">
+                        <label id="drink_image_label">Image</label>
+                        <input id="drink_image_input" type="file"/>
+                    </div>
+                    <div id="drink_description">
+                        <label id="drink_description_label">Description</label>
+                        <input id="drink_description_input" type="text" placeholder="Drink Description"/>
+                    </div>
+                    <div id="drink_ingredients">
+                        <div id="drink_ingredients_quantity">
+                            <label id="drink_ingredients_quantity_label">Quantity</label>
+                            <input id="drink_ingredients_quantity_input" type="text" placeholder="leave blank if none"/>
+                        </div>
+                        <div id="drink_ingredients_name">
+                            <label id="drink_ingredients_name_label">Name</label>
+                            <input id="drink_ingredients_name_input" type="text" placeholder="Ingredient"/>
+                        </div>
+                        <button id="drink_ingredients_add">Add</button>
+                    </div>
+                    <div id="drink_recipe">
+                        <label id="drink_recipe_label">Steps</label>
+                        <input id="drink_recipe_input" type="text" placeholder="recipe step"/>
+                    </div>
+                    <input id="custom_drink_save" type="submit" value="save"/>
                 </form>
             </section>
             <section id="drink_selection" class="inactive" data-role="page">
@@ -95,7 +121,7 @@
             </section>
             <nav id="navbar">
                 <ul>
-                    <li><a href="#home" data-role="pagelink" class="activetab">Home</a></li>
+                    <li><a id="home_button" href="#home" data-role="pagelink" class="activetab">Home</a></li>
                     <li><a href="#favourite" data-role="pagelink" class="">Favourites</a></li>
                     <li><a href="#search" data-role="pagelink" class="">Search</a></li>
                     <li><a href="#settings" data-role="pagelink" class="">Settings</a></li>
@@ -104,7 +130,7 @@
         </div>
         <!--
         <script type="text/javascript" src="cordova.js"></script>-->
-        <script type="text/javascript" src="js/drinks.json"></script>
+        <!--<script type="text/javascript" src="js/drinks.json"></script>-->
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

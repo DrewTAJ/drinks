@@ -1,4 +1,4 @@
-var drinkindex = { "Category" : [
+{ "Category" : [
 	{
 		"title" : "Strong",
 		"Drinks" :[
@@ -90,12 +90,12 @@ var drinkindex = { "Category" : [
 				],
 				"recipe" : ["Mix them","Drink it"],
 				"description" : "The single greatest drink of all time"
-			},
+			}
 		]
 	},
 	{
 		"title" : "Medium",
-		"Drinks" : []
+		"Drinks" : [null]
 	},
 	{
 		"title" : "Non-Alcoholic",
@@ -103,16 +103,23 @@ var drinkindex = { "Category" : [
 			{
 				"Name" : "Virgin Cuba Librae",
 				"picture" : "null",
-				"ingredients" : {
-
-				},
-				"recipe" : [],
-				"description": "" 
+				"ingredients" : [
+					{
+						"Name": "Coke",
+						"Quantity": "All"
+					},
+					{
+						"Name": "Rum",
+						"Quantity": "None"
+					}
+				],
+				"recipe" : [null],
+				"description": "null" 
 			}
 		]
 	},
 	{
 		"title" : "Exotic",
-		"Drinks" : []
+		"Drinks" : [null]
 	}
-]};
+]}
