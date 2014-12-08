@@ -5,7 +5,10 @@ var numLinks;
 var Screens = [];   
 var header_title;
 var inner_text;
-
+var imagevar;
+var reading;
+var writing;
+var custom_drink_pojo;
 
 var app = {
     // Application Constructor
@@ -60,6 +63,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 //        alert(document.querySelector("body").offsetWidth);
+
+        reader = false;
+        writer = false;
         console.log(document.querySelector("body").offsetWidth);
     },
     // Update DOM on a Received Event
@@ -122,6 +128,12 @@ function loadPage(pagename, idder) {
         // }
         // console.log("IN FOR LOOP");
     }
+
+    if(idder == "My") {
+        window.requestFileSystem(LocalFileSystem.Persistent, 5*1024*1024, onFileSuccess, errorHandler);
+    }
+
+
     for (var i = 0; i < numPages; i++) {
         if (pages[i].id == pagename) {
 //          console.log("showing the page");
@@ -173,6 +185,9 @@ function loadPage(pagename, idder) {
     console.log(header_title.innerHTML+" title");
     var atr = '[href="#'+pagename+'"]';
     console.log(atr);
+
+    imagevar = null;
+
     if(pagename == "home") {
         document.querySelector("#home_button").className = "activetab";
     } else  {
@@ -214,6 +229,8 @@ function addInput(ev) {
 function saveDrink(ev) {
     ev.preventDefault();
 
+    writer = true;
+
     var drink_name = document.querySelector("#drink_name_input");
     var drink_image = null;
     var drink_description = document.querySelector("#drink_description_input");
@@ -238,9 +255,12 @@ function saveDrink(ev) {
     }
 
     if(drink_name_count == drink_ingredient_name.length && drink_name.value != "" && drink_recipe_count == drink_recipe_steps.length) {
-        var custom_drink_pojo = {
+
+        window.requestFileSystem(LocalFileSystem.Persistent, 5*1024*1024, onFileSuccess, errorHandler);
+
+        custom_drink_pojo = {
             "title" : drink_name,
-            "picture" : null,
+            "picture" : imagevar,
             "ingredients" : [],
             "recipe" : [],
             "description" : drink_description.value
@@ -260,7 +280,6 @@ function saveDrink(ev) {
 
             custom_drink_pojo.recipe.push(pushable);
         }
-
     } else {
         alert("Please fill out all necessary form fields accordingly")
     }
@@ -279,18 +298,79 @@ function getImage(ev) {
             destinationType: Camera.DestinationType.FILE_URI,
         };           
     }
-    navigator.camera.getPicture( cameraSuccess, cameraError, cameraOptions);     
     console.log("IMAGE");
-    window.confirm("Use this image?");
-
+    navigator.camera.getPicture( cameraSuccess, cameraError, cameraOptions);     
+   
 }
 
 function cameraSuccess(imageURI) {
-
+    imagevar = imageURI;
 }
 
 function cameraError(error) {
     alert("Error Code: "+error);
+}
+
+function onFileSuccess(fileSystem) {
+    if(writer == true) {
+        fileSystem.root.getFile('drink_user.json', {create: false}, getFileWriterSuccess, errorHandler);
+    } else {
+        fileSystem.root.getFile('drink_user.json', {create: false}, getFileReaderSuccess, errorHandler);
+    }
+}
+
+function getFileReaderSuccess(fileEntry) {
+    var reader = new FileReader();
+
+    reader.onload() = function() {
+
+    }
+}
+
+function getFileWriterSuccess(fileEntry) {
+    fileEntry.createWriter(function(fileWriter) {
+        
+        fileWriter.onwriteend = function(e) {
+            console.log("Write Completed");
+        };
+
+        fileWriter.onerror = function(e) {
+            console.log("Write failed: " + e.toString());
+        };
+
+        var blob = custom_drink_pojo;
+
+        fileWriter.write(blob);
+
+
+    },errorHandler);
+}
+
+function errorHandler(e) {
+  var msg = '';
+
+  switch (e.code) {
+    case FileError.QUOTA_EXCEEDED_ERR:
+      msg = 'QUOTA_EXCEEDED_ERR';
+      break;
+    case FileError.NOT_FOUND_ERR:
+      msg = 'NOT_FOUND_ERR';
+      break;
+    case FileError.SECURITY_ERR:
+      msg = 'SECURITY_ERR';
+      break;
+    case FileError.INVALID_MODIFICATION_ERR:
+      msg = 'INVALID_MODIFICATION_ERR';
+      break;
+    case FileError.INVALID_STATE_ERR:
+      msg = 'INVALID_STATE_ERR';
+      break;
+    default:
+      msg = 'Unknown Error';
+      break;
+  };
+
+  console.log('Error: ' + msg);
 }
 
 function show(page) {
