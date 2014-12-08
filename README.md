@@ -5,3 +5,14 @@ Gina Mazzolin (mazz0016)
 
 
 The repository for the MAD9135 final project.
+
+Todo:
+- Finish CSS
+- get JSON working
+- get File Systems working
+- Decide on local or internet database
+
+Plugins used:
+- Camera
+- Network Information
+- File System
