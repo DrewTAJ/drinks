@@ -39,10 +39,12 @@ var app = {
             document.querySelector("#drink_step_add").addEventListener("touched",addInput,false);
             document.querySelector("#custom_drink_save").addEventListener("touchend",saveDrink,false);
             document.querySelector("#drink_image_input").addEventListener("touchend",getImage,false);
+            document.querySelector("#drink_image_input_cameraroll").addEventListener("touchend",getImage,false);
         } else {
             document.querySelector("#drink_ingredients_add").addEventListener("click",addInput,false);
             document.querySelector("#drink_step_add").addEventListener("click",addInput,false);
             document.querySelector("#custom_drink_save").addEventListener("click",saveDrink,false);
+            document.querySelector("#drink_image_input").addEventListener("touchend",getImage,false);
         }
 
         if(detectTouchSupport()) {
@@ -166,6 +168,8 @@ function loadPage(pagename, idder) {
             break;
     }
 
+    document.querySelector("#back_button a").href = "#"+Screens[Screens.length - 1];
+
     console.log(header_title.innerHTML+" title");
     var atr = '[href="#'+pagename+'"]';
     console.log(atr);
@@ -211,7 +215,7 @@ function saveDrink(ev) {
     ev.preventDefault();
 
     var drink_name = document.querySelector("#drink_name_input");
-    var drink_image = document.querySelector("#drink_image_input");
+    var drink_image = null;
     var drink_description = document.querySelector("#drink_description_input");
     var drink_ingredient_name = document.querySelectorAll("#drink_ingredients_quantity_input");
     var drink_ingredient_quantity = document.querySelectorAll("#drink_ingredients_name_input");
@@ -265,17 +269,29 @@ function saveDrink(ev) {
 
 function getImage(ev) {
     ev.preventDefault();
+    if(ev.currentTarget.id == "drink_image_input_cameraroll") {
+        var cameraOptions = {
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        };  
+    } else {
+        var cameraOptions = {
+            destinationType: Camera.DestinationType.FILE_URI,
+        };           
+    }
+    navigator.camera.getPicture( cameraSuccess, cameraError, cameraOptions);     
     console.log("IMAGE");
-    // navigator.camera.getPicture( cameraSuccess, cameraError);
+    window.confirm("Use this image?");
+
 }
 
-// function cameraSuccess(imageURI) {
+function cameraSuccess(imageURI) {
 
-// }
+}
 
-// function cameraError(error) {
-//     alert("Error Code: "+error);
-// }
+function cameraError(error) {
+    alert("Error Code: "+error);
+}
 
 function show(page) {
     page.className = "active";
@@ -290,3 +306,18 @@ function detectTouchSupport( ){
   touchSupport = (("ontouchstart" in window) || msGesture || (window.DocumentTouch && document instanceof DocumentTouch));
   return touchSupport;
 }
+
+var sim = {
+    goOffline: function() {
+        sim._dispatchEvent("offline");
+    },
+    goOnline: function() {
+        sim._dispatchEvent("online");
+    }, 
+    _dispatchEvent: function(eventType) {
+        var event = document.createEvent('Event');
+        event.initEvent(eventType, true, true);
+        document.dispatchEvent(event);
+        app.contactStarter(eventType);
+    }
+};
