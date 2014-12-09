@@ -10,6 +10,7 @@ Todo:
 - Finish CSS
   - Style Create A Drink Form
 - get JSON working (Done)
+- Finish Search Functionality
 - get File Systems working
   - Read from userdrinks.json (Custom drink JSON)
   - Write to userdrinks.json (Custom drink JSON)
