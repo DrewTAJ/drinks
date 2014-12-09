@@ -8,9 +8,9 @@ The repository for the MAD9135 final project.
 
 Todo:
 - Finish CSS
-- get JSON working
+- get JSON working (Done)
 - get File Systems working
-- Decide on local or internet database
+- Decide on local or internet database (Local)
 
 Plugins used:
 - Camera
