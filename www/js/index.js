@@ -9,6 +9,7 @@ var imagevar;
 var reading;
 var writing;
 var custom_drink_pojo;
+var onlineConnection;
 
 var app = {
     // Application Constructor
@@ -64,17 +65,24 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-//        alert(document.querySelector("body").offsetWidth);
-        // var drinksjson = JSON.parse(drinkindex);
-        // console.log(drinksjson);
+        if(detectTouchSupport()) {
+            if(networkState == "none") {
+                sim.goOffline();
+            } else {
+                sim.goOnline();
+            }
+        }
+    },
+
+    appStarter: function(connection) {
         console.log(drinkindex);
         reader = false;
         writer = false;
-        console.log(document.querySelector("body").offsetWidth);
-    },
+        console.log(document.querySelector("body").offsetWidth);        
+    }
     // Update DOM on a Received Event
 };
-app.initialize();
+
 
 function Toucher(ev) {
     ev.preventDefault(); //This stops the 300ms delay
@@ -241,33 +249,33 @@ function loadPage(pagename, idder) {
     }
 }
 
-function drinkDisplay() {
+function drinkDisplay(l) {
     var lister = document.querySelector("#"+pagename+" ul");
     lister.querySelectorAll("li a");
 
     var c = 0;
 
     var imager = document.createElement("img");
-    if(drinkindex.Category[k].Drinks[c].picture == null) {
+    if(drinkindex.Category[l].Drinks[c].picture == null) {
         imager.src = "";
     } else {
-        imager.src = drinkindex.Category[k].Drinks[c].picture;
+        imager.src = drinkindex.Category[l].Drinks[c].picture;
     }
 
     var description = document.createElement("p");
     if(drinkindex.Category[k].Drinks[c].description == null) {
         description.innerHTML = ""
     } else {
-        description.innerHTML = drinkindex.Category[k].Drinks[c].description;
+        description.innerHTML = drinkindex.Category[l].Drinks[c].description;
     }    
 
     var ingredient_list = document.createElement("ul");
     for(var i = 0; i < drinkindex.Category[k].Drinks[c].ingredients.length; i++) {
         var ingredient_listing = document.createElement("li");
         if(drinkindex.Category[k].Drinks[c].ingredients[i].Quantity == null) {
-            ingredient_listing.innerHTML = drinkindex.Category[k].Drinks[c].ingredients[i].Name;
+            ingredient_listing.innerHTML = drinkindex.Category[l].Drinks[c].ingredients[i].Name;
         } else {
-            ingredient_listing.innerHTML = drinkindex.Category[k].Drinks[c].ingredients[i].Quantity+" "+drinkindex.Category[k].Drinks[c].ingredients[i].Name;
+            ingredient_listing.innerHTML = drinkindex.Category[l].Drinks[c].ingredients[i].Quantity+" "+drinkindex.Category[l].Drinks[c].ingredients[i].Name;
         }
         ingredient_list.appendChild(ingredient_listing);
     }
@@ -516,15 +524,19 @@ function detectTouchSupport( ){
 
 var sim = {
     goOffline: function() {
+        onlineConnection = false;
         sim._dispatchEvent("offline");
     },
     goOnline: function() {
+        onlineConnection = true;
         sim._dispatchEvent("online");
     }, 
     _dispatchEvent: function(eventType) {
         var event = document.createEvent('Event');
         event.initEvent(eventType, true, true);
         document.dispatchEvent(event);
-        app.contactStarter(eventType);
+        app.appStarter(eventType);
     }
 };
+
+app.initialize();
