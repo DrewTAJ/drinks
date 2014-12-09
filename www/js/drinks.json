@@ -1,4 +1,4 @@
-{ "Category" : [
+var drinkindex = {"Category" : [
 	{
 		"title" : "Strong",
 		"Drinks" :[
@@ -85,7 +85,7 @@
 					},
 					{
 						"Name" : "Tonic",
-						"Quantityy" : null
+						"Quantity" : null
 					}
 				],
 				"recipe" : ["Mix them","Drink it"],
@@ -95,14 +95,116 @@
 	},
 	{
 		"title" : "Medium",
-		"Drinks" : [null]
+		"Drinks" : [
+			{
+				"Name" : "Two Lonely Guys",
+				"picture" : null,
+				"ingredients" : [
+					{
+						"Name" : "Buttershots liqueur",
+						"Quantity" : "1/2 oz"
+					},
+					{
+						"Name" : "Crown Royal Whiskey",
+						"Quantity" : "1/2 oz"
+					},
+					{
+						"Name" : "Coca-Cola",
+						"Quantity" : null
+					}
+				],
+				"recipe" : ["Mix Buttershots and Whiskey and pour into glass", "Fill it with Coca-Cola on the rocks", "Enjoy!"],
+				"description" : null,
+				"source" : "http://www.drinksmixer.com/drinkrq15631.html"
+			},
+			{
+				"Name" : "Two Lesbians for Flavour",
+				"picture": null,
+				"ingredients" : [
+					{
+						"Name" : "green creme de menthe",
+						"Quantity" : "1/2 oz"
+					},
+					{
+						"Name" : "white creme de cacao",
+						"Quantity" : "1 oz"
+					},
+					{
+						"Name" : "cream",
+						"Quantity" : "2 oz"
+					},
+					{
+						"Name" : "milk",
+						"Quantity" : "2 oz"
+					},
+					{
+						"Name" : "ice",
+						"Quantity" : "2 Scoops"
+					},
+					{
+						"Name" : "chocolate topping",
+						"Quantity" : "1 bottle"
+ 					},
+					{
+						"Name" : "Chocolate Coating",
+						"Quantity" : "1 bottle"
+					}					
+				],
+				"recipe" : ["place 2 scoops of ice in a blender","add creme de menth in blender","add creme de cacao","scoop creame into blender, followed by milk","get hurricane and line the bottom of with chocolate topping (before adding contents of jug), tip the glass on its side, slightly with the rim of glass facing down and twist the glass so as to swirl the chocolate topping", "quickly pour the contents of blender into the glass and drop a few drops of chocolate coating to dot on top", "garnish with 2 pineapple leaves and a cherry with a mint leaf poking out the top"],
+				"description" : "A  Chocolate delight to share with that special someone ;)",
+				"source" : "http://www.drinksmixer.com/drinkrq15631.html"
+			},
+			{
+				"Name" : "Tequila Sunrise",
+				"picture": null,
+				"ingredients" : [
+					{
+						"Name" : "tequila",
+						"Quantity" : "2 msr"
+					},
+					{
+						"Name" : "orange juice",
+						"Quantity" : null
+					},
+					{
+						"Name" : "grenadine syrup",
+						"Quantity" : "2 dashes"
+					}
+				],
+				"recipe" : ["Pour tequila in a highball glass with ice, top with orange juice and stir","Add grenadine by tilting glass and pouring grenadine down side by flipping the bottom vertically very quickly", "The grenadine should go straight to the bottom and then rise up slowly through the drink.","Garnish stirrer, straw and cherry-orange"],
+				"description" : "Great drink if you want tequila in the morining",
+				"source" : "http://www.drinksmixer.com/drink2340.html"
+			},
+			{
+				"Name" : "Lethal Lime Pepsi",
+				"picture" : null,
+				"ingredients" : [
+					{
+						"Name" : "Bacardi 151 rum",
+						"Quantity" : "1 part"
+					},
+					{
+						"Name" : "Lime juice",
+						"Quantity" : "1 part"
+					},
+					{
+						"Name" : "Pepsi",
+						"Quantity" : "3 parts"
+					}
+				],
+				"recipe" : ["Add Pepsi first","Add Bacardi, Lime juice and mix!","Enjoy!"],
+				"description" : "Good party drink",
+				"source" : "http://www.drinksmixer.com/drinkz172y77.html"
+			}
+
+		]
 	},
 	{
 		"title" : "Non-Alcoholic",
 		"Drinks" : [
 			{
 				"Name" : "Virgin Cuba Librae",
-				"picture" : "null",
+				"picture" : null,
 				"ingredients" : [
 					{
 						"Name": "Coke",
@@ -113,13 +215,64 @@
 						"Quantity": "None"
 					}
 				],
-				"recipe" : [null],
-				"description": "null" 
+				"recipe" : ["Pur coke in a glass of your choice","DO NOT add rum"],
+				"description": "It's coke and rum minus the rum"
+			},
+			{
+				"Name" : "Apello",
+				"picture" : null,
+				"ingredients" : [
+					{
+						"Name" : "Orange Juice",
+						"Quantity" : "4 cl",
+					},
+					{
+						"Name" : "Grapefruit Juice",
+						"Quantity" : "3 cl"
+					},
+					{
+						"Name" : "Apple Juice",
+						"Quantity" : "1 cl"
+					}
+				],
+				"recipe" : ["Stir together in a highball glass.", "Garnish with a maraschino cherry, and serve."],
+				"description" : "A great drink to have at a party when you are the designated driver",
+				"source" : "http://www.drinksmixer.com/drink460.html"
 			}
 		]
 	},
 	{
 		"title" : "Exotic",
-		"Drinks" : [null]
+		"Drinks" : [
+			{
+				"Name" : "Big Dumb Russian",
+				"picture" : null,
+				"ingredients" : [
+					{
+						"Name" : "ice cubes",
+						"Quantity" : null
+					},
+					{
+						"Name" : "Vodka",
+						"Quantity" : "2 oz"
+					},
+					{
+						"Name" : "Sprite",
+						"Quantity" : "3 parts"
+					},
+					{
+						"Name" : "pineapple juice",
+						"Quantity" : "1 splash" 
+					},
+					{
+						"Name" : "Hawaiian schnapps",
+						"Quantity" : null
+					}
+				],
+				"recipe" : ["Fill the glass with the ice","Add about 2 shots of vodka", "Then fill the glass 3/4 with Sprite","Then add a splash of pineapple juice","Finally, add the Hawaiian schnapps and stir"],
+				"description" : "A great drink to have when on a tropical vacation.",
+				"source" : "http://www.drinksmixer.com/drink1227.html"
+			}
+		]
 	}
 ]}

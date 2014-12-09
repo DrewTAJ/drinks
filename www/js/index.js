@@ -63,7 +63,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 //        alert(document.querySelector("body").offsetWidth);
-
+        // var drinksjson = JSON.parse(drinkindex);
+        // console.log(drinksjson);
+        console.log(drinkindex);
         reader = false;
         writer = false;
         console.log(document.querySelector("body").offsetWidth);
@@ -98,35 +100,53 @@ function loadPage(pagename, idder) {
         console.log("bullshit "+pagename)
         var lister = document.querySelector("#"+pagename+" ul");
         // console.log("BEFORE JSON PARSIG");
-        // var drinksjson = JSON.parse("drinks.json");
-        // var k;
+        // var drinksjson = JSON.parse(drinkindex);
         // console.log(drinksjson);
+        // var k;
+
+        var cateback = false;
+        
         console.log("Before FOR LOOP");
         switch(idder) {
             case "Strong":
                 k = 0;
+                cateback = true;
                 break;
             case "Medium":
                 k = 1;
+                cateback = true;
                 break;
             case "Non-Alcoholic":
                 k = 2;
+                cateback = true;
                 break;
             case "Exotic":
                 k = 3;
+                cateback = true;
                 break;
             default: 
                 k = null;
                 break;
         }
-        // for(var i = 0; i < drinksjson.Category[k].length; i++) {
-        //     console.log("IN FOR LOOP");
-        //     var listing = '<li>';
-        //         listing+= '<a href="#'+pagename+'" data-role="pagelink">'+drinksjson.Category[k].Drinks[i].name+'</a>';
-        //         listing += '</li>';
-        //     lister.appendChild(listing);
-        // }
-        // console.log("IN FOR LOOP");
+
+        console.log(cateback+" "+k);
+
+        if(cateback == true) {     
+            for(var i = 0; i < drinkindex.Category[k].Drinks.length; i++) {
+                console.log("IN FOR LOOP");
+                var listing = document.createElement("li");
+
+                var listingA = document.createElement("a");
+                listingA.href="#"+pagename;
+                listingA.setAttribute("data-role", "pagelink");
+                listingA.innerHTML=drinkindex.Category[k].Drinks[i].Name;
+                console.log(drinkindex.Category[k].Drinks[i].Name)
+
+                listing.appendChild(listingA);
+
+                lister.appendChild(listing);
+            }
+        }
     }
 
     if(idder == "My") {
@@ -187,6 +207,13 @@ function loadPage(pagename, idder) {
     console.log(atr);
 
     imagevar = null;
+
+    if(Screens.lenth > 1) {
+        console.log(Screens[Screens.length - 1]);
+        document.querySelector("#back_button a").href= "#"+Screens[Screens.length - 1];
+    } else {
+        document.querySelector("#back_button a").href= "#home";
+    }
 
     if(pagename == "home") {
         document.querySelector("#home_button").className = "activetab";
@@ -313,23 +340,33 @@ function cameraError(error) {
 
 function onFileSuccess(fileSystem) {
     if(writer == true) {
-        fileSystem.root.getFile('drink_user.json', {create: false}, getFileWriterSuccess, errorHandler);
+        fileSystem.root.getFile('userdrinks.json', {create: false}, getFileWriterSuccess, errorHandler);
     } else {
-        fileSystem.root.getFile('drink_user.json', {create: false}, getFileReaderSuccess, errorHandler);
+        fileSystem.root.getFile('userdrinks.json', {create: false}, getFileReaderSuccess, errorHandler);
     }
 }
 
 function getFileReaderSuccess(fileEntry) {
+
+    fileEntry.file();
+
     var reader = new FileReader();
 
     reader.onload() = function() {
+        var txtArea = document.createElement('textArea');
+        for(var i = 0; i < this.result.length; i++) {
 
+        }
+        txtArea.value = this.result;
+        document.body.appendChild(txtArea); 
     }
+
+    reader.readAsText(file)
 }
 
 function getFileWriterSuccess(fileEntry) {
     fileEntry.createWriter(function(fileWriter) {
-        
+
         fileWriter.onwriteend = function(e) {
             console.log("Write Completed");
         };
