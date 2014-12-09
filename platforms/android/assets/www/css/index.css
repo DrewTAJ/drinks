@@ -18,7 +18,7 @@ h1 {
 }
 
 .wrapper section {
-    padding-top:36px;
+    padding-top:95px;
 }
 
 .active {
@@ -96,7 +96,7 @@ h1 {
     position:fixed;
     width:100%;
     bottom:0;
-    height: 60px;
+    height: 80px;
 }
 
 #navbar ul {
@@ -105,7 +105,7 @@ h1 {
 }
 
 #navbar ul li { 
-    height: 60px;
+    height: 80px;
     width:24.8%;
     float:left;
     clear:none;
@@ -190,7 +190,7 @@ a {
 #home {
     background-color: #faa3b8;
     height: 100%;
-    /*padding-bottom: 75%;*/
+    padding-bottom: 65%;
 }
 #home a {
     padding-top: 20px;
@@ -204,7 +204,7 @@ a {
 #favourite {
     background-color: #fee3a1;
     height: 100%;
-    /*padding-bottom: 100%;*/
+    padding-bottom: 100%;
 }
 #favourite ul li {
     border-bottom: 4px solid black;
@@ -218,7 +218,7 @@ a {
 #search {
     background-color: #91def0;
     height: 100%;
-    /*padding-bottom: 90%;*/
+    padding-bottom: 90%;
 
 }
 .searchTxt {
@@ -227,6 +227,18 @@ a {
     width: 90%;
     margin-left: 5%;
     margin-top: 5%;
+	border: 2px solid black;
+}
+
+#drink_search_submit {
+border-radius: 10px;
+height: 60px;
+width: 90%;
+margin-left: 5%;
+margin-top: 5%;
+font-size: 100%;
+background-color: aliceblue;
+border: 2px solid black;
 }
 
 ul {
@@ -247,7 +259,7 @@ ul {
     background-color: #82a882;
     height: 100%;
     overflow:auto;
-    /*padding-bottom: 130%;*/
+    padding-bottom: 130%;
 }
 
 #settings a {
