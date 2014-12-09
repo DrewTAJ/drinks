@@ -96,7 +96,7 @@ h1 {
     position:fixed;
     width:100%;
     bottom:0;
-    height: 40px;
+    height: 60px;
 }
 
 #navbar ul {
@@ -105,7 +105,7 @@ h1 {
 }
 
 #navbar ul li { 
-    height: 40px;
+    height: 60px;
     width:24.8%;
     float:left;
     clear:none;
@@ -138,21 +138,25 @@ a {
     /*padding-bottom: 10px;*/
 }
 
-/*#navbar ul li:first-child .activetab {
+#navbar ul li:first-child .activetab {
     background:url("../img/homeSelect.png") no-repeat center;
+	background-size: 35%, 35%;
 }
 
 #navbar ul li:nth-child(2) .activetab {
     background:url("../img/favouriteSelect.png") no-repeat center;
+	background-size: 35%, 35%;
 }
 
-#navbar ul li:nth-child(3) < .activetab {
+#navbar ul li:nth-child(3)  .activetab {
     background:url("../img/searchSelect.png") no-repeat center;
+	background-size: 35%, 35%;
 }
 
 #navbar ul li:last-child .activetab {
     background:url("../img/settingsSelect.png") no-repeat center;
-}*/
+	background-size: 35%, 35%;
+}
 
 #navbar ul li:first-child {
     background:url("../img/homeNotSelect.png") no-repeat 50% 0;

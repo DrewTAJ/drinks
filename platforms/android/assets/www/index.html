@@ -23,7 +23,7 @@
                     <div id="filter_button" class="off"></div>
                 </div>
             </nav>               
-            <section id="home" class="inactive" data-role="page">           
+            <section id="home" class="active" data-role="page">           
                 <a id="My" href="#drink_selection" data-role="pagelink">My Drinks</a>
                 <a href="#drink_display" data-role="pagelink">Random Drink</a>
                 <a id="Strong" href="#drink_selection" data-role="pagelink">Strong Drinks</a>
@@ -77,7 +77,7 @@
                     </ul>                    
                 </div>
             </section>
-            <section id="custom_drink" class="active" data-role="page">
+            <section id="custom_drink" class="inactive" data-role="page">
                 <form id="custom_drink_form">
                     <div id="drink_name">
                         <label id="drink_name_label" for="drink_name_input">Name</label>
@@ -85,7 +85,8 @@
                     </div>
                     <div id="drink_image">
                         <label id="drink_image_label">Image</label>
-                        <button id="drink_image_input">Picture</button>
+                        <button id="drink_image_input">Camera</button>
+                        <button id="drink_image_input_cameraroll">Library</button>
                         <p id="drink_image_input_value"></p>
                     </div>
                     <div id="drink_description">
@@ -132,7 +133,7 @@
         </div>
         <!--
         <script type="text/javascript" src="cordova.js"></script>-->
-        <!--<script type="text/javascript" src="js/drinks.json"></script>-->
+        <script type="text/javascript" src="js/drinks.json"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>
