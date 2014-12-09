@@ -8,8 +8,12 @@ The repository for the MAD9135 final project.
 
 Todo:
 - Finish CSS
+  - Style Create A Drink Form
 - get JSON working (Done)
 - get File Systems working
+  - Read from userdrinks.json (Custom drink JSON)
+  - Write to userdrinks.json (Custom drink JSON)
+- Change Navigation (Fix swapping icons)
 - Decide on local or internet database (Local)
 
 Plugins used:
