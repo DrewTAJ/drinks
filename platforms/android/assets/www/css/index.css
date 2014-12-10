@@ -89,6 +89,10 @@ h1 {
 #filter_button {
     background:url("../img/searchNotSelect.png") no-repeat center;
 }
+
+.backBtn {
+width: 50%;
+}
 /****************************
         Navbar menu
 ****************************/
