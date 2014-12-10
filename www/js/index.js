@@ -147,6 +147,14 @@ function loadPage(pagename, idder) {
     }
 
     if(idder == "My") {
+        var header_add = document.querySelectorAll("#header2 div");
+        for(var i = 0; i < header_add.length; i++) {
+            if(header_add[i].id = "add_button") {
+                header_add[i].className = "on";
+            } else {
+                header_add[i].className = "off";
+            }
+        }
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 5*1024*1024, onFileSuccess, errorHandler);
     } else if(idder == "Random") {
         randomDrinkDisplay();
@@ -295,7 +303,7 @@ function drinkDisplay(ev) {
 
                 var imager = document.createElement("img");
                 if(drinkindex.Category[k].Drinks[c].picture == null) {
-                    imager.src = "";
+                    imager.src = "img/No-Icon.png";
                 } else {
                     imager.src = drinkindex.Category[k].Drinks[c].picture;
                 }
