@@ -1,4 +1,4 @@
-var drinkindex = {"Category" : [
+{"Category" : [
 	{
 		"title" : "Strong",
 		"Drinks" :[
@@ -224,7 +224,7 @@ var drinkindex = {"Category" : [
 				"ingredients" : [
 					{
 						"Name" : "Orange Juice",
-						"Quantity" : "4 cl",
+						"Quantity" : "4 cl"
 					},
 					{
 						"Name" : "Grapefruit Juice",

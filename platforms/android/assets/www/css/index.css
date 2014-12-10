@@ -302,4 +302,14 @@ nav h2 {
 **********************************************************************************************************************************************************************/
 @media all and (max-width:350px) {
 
+#navbar ul li { 
+    height: 80px;
+    width:24%;
+    float:left;
+    clear:none;
+    list-style: none;
+    text-align: center;
+/*    background-color: red;*/    
+}
+
 }
