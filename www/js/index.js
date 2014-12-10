@@ -14,7 +14,7 @@ var drinkPOJOArray = [];
 var k;
 
 var app = {
-    // Application Constructor
+
     initialize: function() {
         console.log("in iNIT")
         pages = document.querySelectorAll("[data-role=page]");
@@ -28,79 +28,59 @@ var app = {
              
         this.bindEvents();
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
+
     bindEvents: function() {     
         console.log("in bindEvents");
         for (var i = 0; i < numLinks; i++) {
-//            if(detectTouchSupport()) {
+           if(detectTouchSupport()) {
                 links[i].addEventListener("touchend", Toucher, false);
-            // } else {
-            //     links[i].addEventListener("click", Toucher, false);
-            // }           
+            } else {
+                links[i].addEventListener("click", Toucher, false);
+            }           
         }        
-//        if(detectTouchSupport()) {
+       if(detectTouchSupport()) {
             document.querySelector("#drink_ingredients_add").addEventListener("touchend",addInput,false);
             document.querySelector("#drink_step_add").addEventListener("touched",addInput,false);
             document.querySelector("#custom_drink_save").addEventListener("touchend",saveDrink,false);
             document.querySelector("#drink_image_input").addEventListener("touchend",getImage,false);
             document.querySelector("#drink_image_input_cameraroll").addEventListener("touchend",getImage,false);
             document.querySelector("#drink_search_submit").addEventListener("touchend",searchDrinks,false);
-            console.log("AFTER TOUCH Listeners");
-        // } else {
-        //     document.querySelector("#drink_ingredients_add").addEventListener("click",addInput,false);
-        //     document.querySelector("#drink_step_add").addEventListener("click",addInput,false);
-        //     document.querySelector("#custom_drink_save").addEventListener("click",saveDrink,false);
-        //     document.querySelector("#drink_image_input").addEventListener("click",getImage,false);
-        //     document.querySelector("#drink_search_submit").addEventListener("click",searchDrinks,false);
-        // }
+        } else {
+            document.querySelector("#drink_ingredients_add").addEventListener("click",addInput,false);
+            document.querySelector("#drink_step_add").addEventListener("click",addInput,false);
+            document.querySelector("#custom_drink_save").addEventListener("click",saveDrink,false);
+            document.querySelector("#drink_image_input").addEventListener("click",getImage,false);
+            document.querySelector("#drink_search_submit").addEventListener("click",searchDrinks,false);
+        }
 
-//        if(detectTouchSupport()) {
-            document.addEventListener("deviceready", onDeviceReady, false);
+       if(detectTouchSupport()) {
+            document.addEventListener("deviceready", this.onDeviceReady, false);
             console.log("AFTER DEVICE READY LISTENER");
-        // } else {
-        //     this.onDeviceReady();   
-        // }
+        } else {
+            this.onDeviceReady();   
+        }
 
     },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    // onDeviceReady: function() {
-    //     console.log("DEVICE READY");
-    //     if(detectTouchSupport()) {
-    //         if(networkState == "none") {
-    //             sim.goOffline();
-    //         } else {
-    //             sim.goOnline();
-    //         }
-    //     }
-    // },
+
+    onDeviceReady: function() {
+        console.log("DEVICE READY");
+        if(detectTouchSupport()) {
+            if(networkState == "none") {
+                sim.goOffline();
+            } else {
+                sim.goOnline();
+            }
+        }
+    },
 
     appStarter: function(connection) {
         console.log("CONNECTION = "+connection);
-//        console.log(drinkindex);
         reader = false;
         writer = false;
         console.log(document.querySelector("body").offsetWidth);        
     }
     // Update DOM on a Received Event
 };
-
-function onDeviceReady() {
-    console.log("DEVICE READY");
-    if(detectTouchSupport()) {
-        if(networkState == "none") {
-            sim.goOffline();
-        } else {
-            sim.goOnline();
-        }
-    }
-}
-
 
 function Toucher(ev) {
     ev.preventDefault(); //This stops the 300ms delay
@@ -169,12 +149,10 @@ function loadPage(pagename, idder) {
         }
     }
 
-    if(pagename == "drink_display") {
-        drinkDisplay(k);
-    }
-
     if(idder == "My") {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 5*1024*1024, onFileSuccess, errorHandler);
+    } else if(idder == "Random") {
+        randomDrinkDisplay();
     }
 
     for (var i = 0; i < numPages; i++) {
@@ -270,7 +248,6 @@ function drinkSelectionDisplay() {
                     listingA.href="#drink_display";
                     listingA.setAttribute("data-role", "pagelink");
                     listingA.innerHTML=drinkindex.Category[k].Drinks[i].Name;
-                    console.log(drinkindex.Category[k].Drinks[i].Name)
 
                     listing.appendChild(listingA);
 
@@ -283,7 +260,7 @@ function drinkSelectionDisplay() {
 }
 
 function drinkDisplay(l) {
-    var lister = document.querySelector("#"+pagename+" ul");
+    var lister = document.querySelector("#drink_display ul");
     lister.querySelectorAll("li a");
 
     var c = 0;
@@ -317,15 +294,88 @@ function drinkDisplay(l) {
 
 function randomDrinkDisplay() {
 
+    var damaged_liver = document.querySelector("#drink_display");
+    damaged_liver.innerHTML = "";
+    console.log("IN randomDrinkDisplay()");
+
+    var liver_failure = [];
+
     var request = new XMLHttpRequest();
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200 || request.status == 0) {
 
+                console.log("In the RandomDrink request");
+//                console.log(request.responseText);
+                var drinkindex = JSON.parse(request.responseText);
+
+//                console.log("Category Length "+(drinkindex.Category.length - 1));
+
+                var randomCategory = Math.round(Math.random() * ((drinkindex.Category.length - 1) + 0) + 0);
+
+                var randomDrink = Math.round(Math.random() * ((drinkindex.Category[randomCategory].Drinks.length - 1) + 0) + 0);
+
+
+                console.log(drinkindex.Category[randomCategory].Drinks[randomDrink].Name+" "+drinkindex.Category.length+" "+drinkindex.Category[randomCategory].Drinks.length+" ("+randomCategory+" "+randomDrink+")");
+
+                document.querySelector("#header_title").innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].Name;
+
+                var divend = document.createElement("div");
+                divend.id = "recipe";
+
+                var uler = document.createElement("ul");
+                uler.id = "ingredients"
+
+                for(var i = 0; i < drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients.length; i++) {
+
+//                    console.log(drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients.length)
+                    var li = document.createElement("li");
+                    if(drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Quantity == null) {
+                        li.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Name;
+                    } else {
+                        li.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Quantity+" "+drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Name;
+                    }
+//                    console.log(li.innerHTML);
+                    uler.appendChild(li);
+                }
+
+                divend.appendChild(uler);
+
+                var img = document.createElement("img");
+                
+                if(drinkindex.Category[randomCategory].Drinks[randomDrink].picture != null) {
+                    img.src = drinkindex.Category[randomCategory].Drinks[randomDrink].picture; 
+                } else {
+                    img.src = "img/No-Icon.png"
+                } 
+
+
+                var recipe_steps = document.createElement("ol");
+
+                for(var i = 0; i < drinkindex.Category[randomCategory].Drinks[randomDrink].recipe.length; i++) {
+                    var recipe_steps_li = document.createElement("li");
+                    recipe_steps_li.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].recipe[i];
+                    recipe_steps.appendChild(recipe_steps_li);
+                }
+                divend.appendChild(recipe_steps);
+
+                var p = document.createElement("p");
+                if(drinkindex.Category[randomCategory].Drinks[randomDrink].description != null) {
+                    p.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].description;
+                } else {
+                    p.innerHTML = "";
+                }
+
+                damaged_liver.appendChild(img);
+                damaged_liver.appendChild(divend);
+                damaged_liver.appendChild(p);
+
+//                console.log("AFTER APPENDING");
             }
         }
     }
+    request.send();
 }
 
 function addInput(ev) {

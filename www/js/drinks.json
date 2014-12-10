@@ -77,8 +77,8 @@
 			},
 			{
 				"Name" : "Gin and Tonic",
-				"picture" : "",
-				"ingreditens" : [
+				"picture" : null,
+				"ingredients" : [
 					{
 						"Name" : "Gin",
 						"Quantity": null
