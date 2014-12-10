@@ -15,6 +15,7 @@ Todo:
   - Read from userdrinks.json (Custom drink JSON)
   - Write to userdrinks.json (Custom drink JSON)
 - Change Navigation (Fix swapping icons)
+  -	Change .activetab from a to li 
 - Decide on local or internet database (Internet)
 
 Plugins used:

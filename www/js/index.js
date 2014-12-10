@@ -16,7 +16,6 @@ var k;
 var app = {
 
     initialize: function() {
-        console.log("in iNIT")
         pages = document.querySelectorAll("[data-role=page]");
         links = document.querySelectorAll("[data-role=pagelink]");
         
@@ -30,7 +29,6 @@ var app = {
     },
 
     bindEvents: function() {     
-        console.log("in bindEvents");
         for (var i = 0; i < numLinks; i++) {
            if(detectTouchSupport()) {
                 links[i].addEventListener("touchend", Toucher, false);
@@ -53,12 +51,13 @@ var app = {
             document.querySelector("#drink_search_submit").addEventListener("click",searchDrinks,false);
         }
 
-       if(detectTouchSupport()) {
-            document.addEventListener("deviceready", this.onDeviceReady, false);
+//       if(detectTouchSupport()) {
+            console.log("BEFORE DEVICE READY LISTENER");
+            document.addEventListener("deviceready", app.onDeviceReady, false);
             console.log("AFTER DEVICE READY LISTENER");
-        } else {
-            this.onDeviceReady();   
-        }
+//        } else {
+//            this.onDeviceReady();   
+//        }
 
     },
 
@@ -233,10 +232,10 @@ function drinkSelectionDisplay() {
             if(request.status == 200 || request.status == 0) {
 
                 console.log("IN onreadystatechange() with everything A OK!");
-                console.log(request);
+//                console.log(request);
                 var drinkindex = JSON.parse(request.responseText);
 
-                console.log(drinkindex);
+//                console.log(drinkindex);
 
                 var lister = document.querySelector("#drink_selection ul");
 
@@ -511,16 +510,15 @@ function getFileReaderSuccess(fileEntry) {
 
     var reader = new FileReader();
 
-    reader.onload() = function() {
-        var txtArea = document.createElement('textArea');
-        for(var i = 0; i < this.result.length; i++) {
-
-        }
-        txtArea.value = this.result;
-        document.body.appendChild(txtArea); 
+    reader.onload() = function(e) {
+        console.log(this.result);
     }
 
-    reader.readAsText(file)
+    reader.readAsText(file);
+
+    var user_drinks = JSON.parse(this.result);
+
+    console.log(user_drinks);
 }
 
 function getFileWriterSuccess(fileEntry) {
@@ -603,6 +601,7 @@ function errorHandler(e) {
       break;
   };
 
+  alert('Error: '+ msg);
   console.log('Error: ' + msg);
 }
 
