@@ -51,13 +51,13 @@ var app = {
             document.querySelector("#drink_search_submit").addEventListener("click",searchDrinks,false);
         }
 
-//       if(detectTouchSupport()) {
+      if(detectTouchSupport()) {
             console.log("BEFORE DEVICE READY LISTENER");
             document.addEventListener("deviceready", app.onDeviceReady, false);
             console.log("AFTER DEVICE READY LISTENER");
-//        } else {
-//            this.onDeviceReady();   
-//        }
+       } else {
+           this.onDeviceReady();   
+       }
 
     },
 
@@ -78,7 +78,6 @@ var app = {
         writer = false;
         console.log(document.querySelector("body").offsetWidth);        
     }
-    // Update DOM on a Received Event
 };
 
 function Toucher(ev) {
@@ -96,7 +95,6 @@ function loadPage(pagename, idder) {
     if (pagename == null || pagename == "undefined") {
         //If the page is not available it will show the home page
         pagename == pages[0].id;
-//      console.log("the page isn't working (is null or undefined)");
     }
     if (Screens[Screens.length - 1] != pagename) {
         Screens.push(pagename);
@@ -223,19 +221,15 @@ function loadPage(pagename, idder) {
 }
 
 function drinkSelectionDisplay() {
-    console.log("in drinkSelectionDisplay()")
     var request = new XMLHttpRequest();
-    console.log("AFTER request");
+    console.log("AFTER request in drinkSelectionDisplay()");
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200 || request.status == 0) {
 
                 console.log("IN onreadystatechange() with everything A OK!");
-//                console.log(request);
                 var drinkindex = JSON.parse(request.responseText);
-
-//                console.log(drinkindex);
 
                 var lister = document.querySelector("#drink_selection ul");
 
@@ -246,11 +240,18 @@ function drinkSelectionDisplay() {
                     var listingA = document.createElement("a");
                     listingA.href="#drink_display";
                     listingA.setAttribute("data-role", "pagelink");
+                    listingA.id = i;
                     listingA.innerHTML=drinkindex.Category[k].Drinks[i].Name;
 
                     listing.appendChild(listingA);
 
                     lister.appendChild(listing);
+                }
+
+                var listingAtouch = lister.querySelectorAll("li a");
+
+                for(var i = 0; i < listingAtouch.length; i++) {
+                    listingAtouch[i].addEventListener("touchend",drinkDisplay,false);
                 }                
             }
         }
@@ -258,37 +259,95 @@ function drinkSelectionDisplay() {
     request.send();
 }
 
-function drinkDisplay(l) {
-    var lister = document.querySelector("#drink_display ul");
-    lister.querySelectorAll("li a");
+function drinkDisplay(ev) {
+    ev.preventDefault();
 
-    var c = 0;
+    var damaged_liver = document.querySelector("#drink_display");
+    damaged_liver.innerHTML = "";
 
-    var imager = document.createElement("img");
-    if(drinkindex.Category[l].Drinks[c].picture == null) {
-        imager.src = "";
-    } else {
-        imager.src = drinkindex.Category[l].Drinks[c].picture;
-    }
+    var currentsource = ev.currentTarget.href;
+    var currsplit = currentsource.split("#");
 
-    var description = document.createElement("p");
-    if(drinkindex.Category[k].Drinks[c].description == null) {
-        description.innerHTML = ""
-    } else {
-        description.innerHTML = drinkindex.Category[l].Drinks[c].description;
-    }    
+    var pagename = currsplit[1];
 
-    var ingredient_list = document.createElement("ul");
-    for(var i = 0; i < drinkindex.Category[k].Drinks[c].ingredients.length; i++) {
-        var ingredient_listing = document.createElement("li");
-        if(drinkindex.Category[k].Drinks[c].ingredients[i].Quantity == null) {
-            ingredient_listing.innerHTML = drinkindex.Category[l].Drinks[c].ingredients[i].Name;
+    for (var i = 0; i < numPages; i++) {
+        if (pages[i].id == pagename) {
+            pages[i].className = "active";
+
+            console.log(pagename+" is now active");
         } else {
-            ingredient_listing.innerHTML = drinkindex.Category[l].Drinks[c].ingredients[i].Quantity+" "+drinkindex.Category[l].Drinks[c].ingredients[i].Name;
+            pages[i].className = "inactive";
         }
-        ingredient_list.appendChild(ingredient_listing);
+    }
+    for (var i = 0; i < numLinks; i++) {
+        links[i].className = " ";
     }
 
+    c = ev.currentTarget.id; 
+
+    var request = new XMLHttpRequest();
+    console.log("AFTER request");
+    request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200 || request.status == 0) {
+                var drinkindex = JSON.parse(request.responseText);
+
+                var imager = document.createElement("img");
+                if(drinkindex.Category[k].Drinks[c].picture == null) {
+                    imager.src = "";
+                } else {
+                    imager.src = drinkindex.Category[k].Drinks[c].picture;
+                }
+
+                var description = document.createElement("p");
+                if(drinkindex.Category[k].Drinks[c].description == null) {
+                    description.innerHTML = "";
+                } else {
+                    description.innerHTML = drinkindex.Category[k].Drinks[c].description;
+                }    
+
+                var divend = document.createElement("div");
+                divend.id = "recipe";
+
+                var uler = document.createElement("ul");
+                uler.id = "ingredients";
+
+                for(var i = 0; i < drinkindex.Category[k].Drinks[c].ingredients.length; i++) {
+                    var ingredient_listing = document.createElement("li");
+                    if(drinkindex.Category[k].Drinks[c].ingredients[i].Quantity == null) {
+                        ingredient_listing.innerHTML = drinkindex.Category[k].Drinks[c].ingredients[i].Name;
+                    } else {
+                        ingredient_listing.innerHTML = drinkindex.Category[k].Drinks[c].ingredients[i].Quantity+" "+drinkindex.Category[k].Drinks[c].ingredients[i].Name;
+                    }
+                    uler.appendChild(ingredient_listing);
+                }                
+                divend.appendChild(uler);
+
+                var recipe_list = document.createElement("ol");
+                for(var i = 0; i < drinkindex.Category[k].Drinks[c].recipe.length; i++) {
+                    var recipe_listing = document.createElement("li")
+                    recipe_listing.innerHTML = drinkindex.Category[k].Drinks[c].recipe[i];
+                    recipe_list.appendChild(recipe_listing);
+                }
+                divend.appendChild(recipe_list);
+
+                var p = document.createElement("p");
+                if(drinkindex.Category[k].Drinks[c].description != null) {
+                    p.innerHTML = drinkindex.Category[k].Drinks[c].description;
+                } else {
+                    p.innerHTML = "";
+                }
+
+                document.querySelector("#header_title").innerHTML = drinkindex.Category[k].Drinks[c].Name;
+                damaged_liver.appendChild(imager);
+                damaged_liver.appendChild(divend);
+                damaged_liver.appendChild(p);
+
+            }
+        }
+    }
+    request.send();
 }
 
 function randomDrinkDisplay() {
@@ -324,18 +383,16 @@ function randomDrinkDisplay() {
                 divend.id = "recipe";
 
                 var uler = document.createElement("ul");
-                uler.id = "ingredients"
+                uler.id = "ingredients";
 
                 for(var i = 0; i < drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients.length; i++) {
 
-//                    console.log(drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients.length)
                     var li = document.createElement("li");
                     if(drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Quantity == null) {
                         li.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Name;
                     } else {
                         li.innerHTML = drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Quantity+" "+drinkindex.Category[randomCategory].Drinks[randomDrink].ingredients[i].Name;
                     }
-//                    console.log(li.innerHTML);
                     uler.appendChild(li);
                 }
 
@@ -346,7 +403,7 @@ function randomDrinkDisplay() {
                 if(drinkindex.Category[randomCategory].Drinks[randomDrink].picture != null) {
                     img.src = drinkindex.Category[randomCategory].Drinks[randomDrink].picture; 
                 } else {
-                    img.src = "img/No-Icon.png"
+                    img.src = "img/No-Icon.png";
                 } 
 
 
@@ -369,8 +426,6 @@ function randomDrinkDisplay() {
                 damaged_liver.appendChild(img);
                 damaged_liver.appendChild(divend);
                 damaged_liver.appendChild(p);
-
-//                console.log("AFTER APPENDING");
             }
         }
     }
@@ -387,7 +442,7 @@ function addInput(ev) {
         var ingredient_quantity = document.createElement("input");
         ingredient_quantity.id = "drink_ingredients_name_input";
         ingredient_quantity.setAttribute("type","text");
-        ingredient_quantity.setAttribute("placeholder","leave blank if none")
+        ingredient_quantity.setAttribute("placeholder","leave blank if none");
 
         var ingredient_name = document.createElement("input")
         ingredient_name.id = "drink_ingredients_quantity_input";
@@ -422,7 +477,7 @@ function saveDrink(ev) {
 
     var drink_quant_count = 0;
     var drink_name_count = 0;
-    var drink_recipe_count = 0
+    var drink_recipe_count = 0;
 
     for(var i = 0; i < drink_ingredient_name.length; i++) {
         if(drink_ingredient_name[i].value != "") {
@@ -466,7 +521,7 @@ function saveDrink(ev) {
         window.requestFileSystem(LocalFileSystem.Persistent, 5*1024*1024, onFileSuccess, errorHandler);
 
     } else {
-        alert("Please fill out all necessary form fields accordingly")
+        alert("Please fill out all necessary form fields accordingly");
     }
 
 }
