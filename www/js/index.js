@@ -11,6 +11,7 @@ var writing;
 var custom_drink_pojo;
 var onlineConnection;
 var drinkPOJOArray = [];
+var k;
 
 var app = {
     // Application Constructor
@@ -123,7 +124,6 @@ function loadPage(pagename, idder) {
         //Saves the history of the screens viewed in the Screens array                                           
     }
 
-    var k;
     
     if(pagename == "drink_selection") {
         console.log("bullshit "+pagename)
@@ -249,23 +249,25 @@ function drinkSelectionDisplay() {
     console.log("in drinkSelectionDisplay()")
     var request = new XMLHttpRequest();
     console.log("AFTER request");
-    request.open("GET","https://github.com/Sparkdragon911/drinks/blob/master/www/js/drinks.json",true);
+    request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200 || request.status == 0) {
 
                 console.log("IN onreadystatechange() with everything A OK!");
-                
+                console.log(request);
                 var drinkindex = JSON.parse(request.responseText);
 
                 console.log(drinkindex);
+
+                var lister = document.querySelector("#drink_selection ul");
 
                 for(var i = 0; i < drinkindex.Category[k].Drinks.length; i++) {
                     console.log("IN FOR LOOP");
                     var listing = document.createElement("li");
 
                     var listingA = document.createElement("a");
-                    listingA.href="#"+pagename;
+                    listingA.href="#drink_display";
                     listingA.setAttribute("data-role", "pagelink");
                     listingA.innerHTML=drinkindex.Category[k].Drinks[i].Name;
                     console.log(drinkindex.Category[k].Drinks[i].Name)
@@ -311,6 +313,19 @@ function drinkDisplay(l) {
         ingredient_list.appendChild(ingredient_listing);
     }
 
+}
+
+function randomDrinkDisplay() {
+
+    var request = new XMLHttpRequest();
+    request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200 || request.status == 0) {
+
+            }
+        }
+    }
 }
 
 function addInput(ev) {
