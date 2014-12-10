@@ -1,7 +1,11 @@
 var pages = [];
+var tabs = [];
 var links = [];
+
 var numPages;
+var numTabs;
 var numLinks;
+
 var Screens = [];   
 var header_title;
 var inner_text;
@@ -12,14 +16,17 @@ var custom_drink_pojo;
 var onlineConnection;
 var drinkPOJOArray = [];
 var k;
+var networkState;
 
 var app = {
 
     initialize: function() {
         pages = document.querySelectorAll("[data-role=page]");
+        tabs = document.querySelectorAll("#navbar ul li");
         links = document.querySelectorAll("[data-role=pagelink]");
         
         numPages = pages.length;
+        numTabs = tabs.length;
         numLinks = links.length;   
 
         pageshow = document.createEvent("Event");
@@ -43,6 +50,7 @@ var app = {
             document.querySelector("#drink_image_input").addEventListener("touchend",getImage,false);
             document.querySelector("#drink_image_input_cameraroll").addEventListener("touchend",getImage,false);
             document.querySelector("#drink_search_submit").addEventListener("touchend",searchDrinks,false);
+            document.querySelector("#connector").addEventListener("touchend",connectOnline,false);
         } else {
             document.querySelector("#drink_ingredients_add").addEventListener("click",addInput,false);
             document.querySelector("#drink_step_add").addEventListener("click",addInput,false);
@@ -74,6 +82,9 @@ var app = {
 
     appStarter: function(connection) {
         console.log("CONNECTION = "+connection);
+        if(connection == "offline") {
+            alert("You have to be online to use many features, please try to reconnect when you are online.");
+        }
         reader = false;
         writer = false;
         console.log(document.querySelector("body").offsetWidth);        
@@ -224,7 +235,15 @@ function loadPage(pagename, idder) {
     if(pagename == "home") {
         document.querySelector("#home_button").className = "activetab";
     } else  {
-        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
+        for(var i = 0; i < numTabs; i++) {
+            var tabsSplit = tabs[i].querySelector("a").href.split("#");
+            if(tabsSplit[1] == pagename) {
+                tabs[i].className = "activetab";
+            } else {
+                tabs[i].className = "";
+            }           
+        }
+//        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
     }
 }
 
@@ -666,6 +685,18 @@ function errorHandler(e) {
 
   alert('Error: '+ msg);
   console.log('Error: ' + msg);
+}
+
+function connectOnline(ev) {
+    ev.preventDefault();
+    if(detectTouchSupport()) {
+        if(networkState == "none") {
+            sim.goOffline();
+        } else {
+            sim.goOnline();
+        }
+    }
+
 }
 
 function show(page) {
