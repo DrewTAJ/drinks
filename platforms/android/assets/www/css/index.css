@@ -163,25 +163,25 @@ a {
 }
 
 #navbar ul li:first-child {
-    background:url("../img/homeNotSelect.png") no-repeat 50% 0;
+    background:url("../img/homeNotSelect.png") no-repeat 50% center;
     background-size:35%, 35%;
     border-right: 1px solid black;
 }
 
 #navbar ul li:nth-child(2) {
-    background:url("../img/favouriteNotSelect.png") no-repeat 50% 0;
+    background:url("../img/favouriteNotSelect.png") no-repeat 50% center;
     border-right: 1px solid black;
     background-size:35%, 35%;
 }
 
 #navbar ul li:nth-child(3) {
-    background:url("../img/searchNotSelect.png") no-repeat 50% 0;
+    background:url("../img/searchNotSelect.png") no-repeat 50% center;
     border-right: 1px solid black;
     background-size:35%, 35%;
 }
 
 #navbar ul li:last-child {
-    background:url("../img/settingsNotSelect.png") no-repeat 50% 0;
+    background:url("../img/settingsNotSelect.png") no-repeat 50% center;
     background-size:35%, 35%;
 }
 
@@ -329,6 +329,54 @@ nav h2 {
     list-style: none;
     text-align: center;
 /*    background-color: red;*/    
+}
+
+#navbar ul li:first-child {
+    background:url("../img/homeNotSelect.png") no-repeat center;
+    background-size:75%, 35%;
+    border-right: 1px solid black;
+}
+
+#navbar ul li:nth-child(2) {
+    background:url("../img/favouriteNotSelect.png") no-repeat center;
+    border-right: 1px solid black;
+    background-size:75%, 35%;
+}
+
+#navbar ul li:nth-child(3) {
+    background:url("../img/searchNotSelect.png") no-repeat center;
+    border-right: 1px solid black;
+    background-size:75%, 35%;
+}
+
+#navbar ul li:last-child {
+    background:url("../img/settingsNotSelect.png") no-repeat center;
+    background-size:75%, 35%;
+}
+
+#navbar ul li.activetab:first-child  {
+    background:url("../img/homeSelect.png") no-repeat center;
+	background-size: 75%, 35%;
+}
+
+#navbar ul li.activetab:nth-child(2)  {
+    background:url("../img/favouriteSelect.png") no-repeat center;
+	background-size: 75%, 35%;
+}
+
+#navbar ul li.activetab:nth-child(3)   {
+    background:url("../img/searchSelect.png") no-repeat center;
+	background-size: 75%, 35%;
+}
+
+#navbar ul li.activetab:last-child  {
+    background:url("../img/settingsSelect.png") no-repeat center;
+	background-size: 75%, 35%;
+}
+
+#navbar ul li a {
+margin-top: 30px;
+font-size: 16px;
 }
 
 }
