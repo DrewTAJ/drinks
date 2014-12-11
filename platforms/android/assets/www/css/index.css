@@ -121,14 +121,10 @@ width: 50%;
 #navbar ul li a {
     padding-top:20px;
 }
-
 a[data-role=pagelink] {
     display:block;
 }
 
-a[class=off] {
-    display:none;
-}
 .activetab {
     /*background-color:blue;*/
     height: 40px;
