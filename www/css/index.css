@@ -142,22 +142,22 @@ a {
     /*padding-bottom: 10px;*/
 }
 
-#navbar ul li:first-child .activetab {
+#navbar ul li.activetab:first-child  {
     background:url("../img/homeSelect.png") no-repeat center;
 	background-size: 35%, 35%;
 }
 
-#navbar ul li:nth-child(2) .activetab {
+#navbar ul li.activetab:nth-child(2)  {
     background:url("../img/favouriteSelect.png") no-repeat center;
 	background-size: 35%, 35%;
 }
 
-#navbar ul li:nth-child(3)  .activetab {
+#navbar ul li.activetab:nth-child(3)   {
     background:url("../img/searchSelect.png") no-repeat center;
 	background-size: 35%, 35%;
 }
 
-#navbar ul li:last-child .activetab {
+#navbar ul li.activetab:last-child  {
     background:url("../img/settingsSelect.png") no-repeat center;
 	background-size: 35%, 35%;
 }
@@ -187,6 +187,10 @@ a {
 
 .activetab {
     background-color: rgba(0,0,255,0.1);
+}
+
+#navbar ul li a {
+margin-top: 30px;
 }
 /****************************
         Home Page
@@ -235,6 +239,17 @@ a {
 }
 
 #drink_search_submit {
+border-radius: 10px;
+height: 60px;
+width: 90%;
+margin-left: 5%;
+margin-top: 5%;
+font-size: 100%;
+background-color: aliceblue;
+border: 2px solid black;
+}
+
+#connector {
 border-radius: 10px;
 height: 60px;
 width: 90%;
