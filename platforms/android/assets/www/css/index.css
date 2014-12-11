@@ -104,7 +104,7 @@ width: 100%;
     position:fixed;
     width:100%;
     bottom:0;
-    height: 80px;
+    height: 95px;
 }
 
 #navbar ul {
@@ -113,7 +113,7 @@ width: 100%;
 }
 
 #navbar ul li { 
-    height: 80px;
+    height: 95px;
     width:24.8%;
     float:left;
     clear:none;
@@ -194,7 +194,7 @@ a {
 }
 
 #navbar ul li a {
-margin-top: 30px;
+margin-top: 40px;
 }
 /****************************
         Home Page
@@ -352,7 +352,7 @@ nav h2 {
 @media all and (max-width:350px) {
 
 #navbar ul li { 
-    height: 80px;
+    height: 90px;
     width:24%;
     float:left;
     clear:none;
@@ -405,7 +405,7 @@ nav h2 {
 }
 
 #navbar ul li a {
-margin-top: 30px;
+margin-top: 50px;
 font-size: 16px;
 }
 
