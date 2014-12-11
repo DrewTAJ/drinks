@@ -1,1 +1,67 @@
-{"prepare_queue":{"installed":[],"uninstalled":[]},"config_munge":{"files":{"res/xml/config.xml":{"parents":{"/*":[{"xml":"<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>","count":1},{"xml":"<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>","count":1},{"xml":"<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>","count":1}]}},"AndroidManifest.xml":{"parents":{"/*":[{"xml":"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />","count":1},{"xml":"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />","count":2}]}}},"res/xml/config.xml":{"/*":{"<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>":0,"<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>":0,"<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>":0}},"AndroidManifest.xml":{"/*":{"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />":0,"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />":0}}},"installed_plugins":{"org.apache.cordova.network-information":{"PACKAGE_NAME":"io.cordova.hellocordova"},"org.apache.cordova.file":{"PACKAGE_NAME":"io.cordova.hellocordova"},"org.apache.cordova.camera":{"PACKAGE_NAME":"io.cordova.hellocordova"}},"dependent_plugins":{}}
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
+                        }
+                    ]
+                }
+            }
+        },
+        "res/xml/config.xml": {
+            "/*": {
+                "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>": 0,
+                "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>": 0,
+                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 0
+            }
+        },
+        "AndroidManifest.xml": {
+            "/*": {
+                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 0,
+                "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />": 0
+            }
+        }
+    },
+    "installed_plugins": {
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        }
+    },
+    "dependent_plugins": {}
+}

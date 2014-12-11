@@ -313,8 +313,11 @@ function drinkIndexDisplay() {
                 var drinkindex = JSON.parse(request.responseText);
 
                 var drinkindex_list = document.createElement("ul");
-                for(var i = 0; drinkindex.Category.length; i++) {
-                    for(var j = 0; i < drinkindex.Category[i].Drinks.length; j++) {
+
+                for(var i = 0; i < drinkindex.Category.length; i++) {
+                    console.log(drinkindex.Category.length);
+                    console.log(drinkindex.Category[i].title);
+                    for(var j = 0; j < drinkindex.Category[i].Drinks.length; j++) {
                         var drinkindex_listing = document.createElement("li");
                         var drinkindex_a = document.createElement("a");
                         drinkindex_a.href="#drink_display"
@@ -322,9 +325,9 @@ function drinkIndexDisplay() {
                         drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
                         drinkindex_a.setAttribute("data-role","pagelink");
                         drinkindex_listing.appendChild(drinkindex_a);
-                        drinkindex_list.appendChild(drink_listing);
+                        drinkindex_list.appendChild(drinkindex_listing);
                     }
-                    
+                pages[1].appendChild(drinkindex_list);    
                 }          
             }
         }
