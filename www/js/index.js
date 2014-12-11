@@ -350,6 +350,9 @@ function drinkDisplay(ev) {
     var currentsource = ev.currentTarget.href;
     var currsplit = currentsource.split("#");
 
+    var hardref = Screens.length - 1;
+    document.querySelector("#back_button a").href = "#"+Screens[hardref];
+
     var pagename = currsplit[1];
 
     for (var i = 0; i < numPages; i++) {
