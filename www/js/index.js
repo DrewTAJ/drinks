@@ -121,20 +121,21 @@ function loadPage(pagename, idder) {
         var cateback = false;
         
         console.log("Before FOR LOOP");
+        console.log("idder = "+idder);
         switch(idder) {
-            case "Strong":
+            case "0":
                 k = 0;
                 cateback = true;
                 break;
-            case "Medium":
+            case "1":
                 k = 1;
                 cateback = true;
                 break;
-            case "Non-Alcoholic":
+            case "2":
                 k = 2;
                 cateback = true;
                 break;
-            case "Exotic":
+            case "3":
                 k = 3;
                 cateback = true;
                 break;
@@ -146,14 +147,9 @@ function loadPage(pagename, idder) {
         console.log(cateback+" "+k);
 
         if(cateback == true) {  
+            lister.innerHTML = "";
 
-            var listingselect = lister.querySelectorAll("li");
-
-            for(var i = 0; i < listingselect.length; i++) {
-                lister.removeChild(listingselect[i]);
-            }   
-
-            drinkSelectionDisplay();
+            drinkSelectionDisplay(k);
 
         }
     }
@@ -260,39 +256,38 @@ function loadPage(pagename, idder) {
     }
 }
 
-function drinkSelectionDisplay() {
+function drinkSelectionDisplay(love) {
     var request = new XMLHttpRequest();
-    console.log("AFTER request in drinkSelectionDisplay()");
+    console.log("AFTER request in drinkSelectionDisplay() k = "+k);
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
             if(request.status == 200 || request.status == 0) {
 
-                console.log("IN onreadystatechange() with everything A OK!");
+                console.log("IN drinkSelectionDisplay onreadystatechange() with everything A OK!");
                 var drinkindex = JSON.parse(request.responseText);
 
                 var lister = document.querySelector("#drink_selection ul");
 
-                for(var i = 0; i < drinkindex.Category[k].Drinks.length; i++) {
+                console.log("Getting Drinks from Category "+drinkindex.Category[love].title);
+
+                console.log("Right BEFORE the for loop, k = "+love);
+                for(var i = 0; i < drinkindex.Category[love].Drinks.length; i++) {
                     console.log("IN FOR LOOP");
                     var listing = document.createElement("li");
 
                     var listingA = document.createElement("a");
                     listingA.href="#drink_display";
                     listingA.setAttribute("data-role", "pagelink");
-                    listingA.id = i;
-                    listingA.innerHTML=drinkindex.Category[k].Drinks[i].Name;
+                    listingA.id = love+","+i;
+                    listingA.addEventListener("touchend",drinkDisplay,false);
+                    listingA.innerHTML=drinkindex.Category[love].Drinks[i].Name;
 
                     listing.appendChild(listingA);
 
                     lister.appendChild(listing);
                 }
-
-                var listingAtouch = lister.querySelectorAll("li a");
-
-                for(var i = 0; i < listingAtouch.length; i++) {
-                    listingAtouch[i].addEventListener("touchend",drinkDisplay,false);
-                }                
+                               
             }
         }
     }
@@ -310,7 +305,7 @@ function drinkIndexDisplay() {
         if(request.readyState == 4) {
             if(request.status == 200 || request.status == 0) {
 
-                console.log("IN onreadystatechange() with everything A OK!");
+                console.log("IN drinkIndexDisplay onreadystatechange() with everything A OK!");
                 var drinkindex = JSON.parse(request.responseText);
 
                 var drinkindex_list = document.createElement("ul");

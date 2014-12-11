@@ -194,7 +194,7 @@ a {
 }
 
 #navbar ul li a {
-margin-top: 40px;
+    margin-top: 40px;
 }
 /****************************
         Home Page
@@ -328,6 +328,10 @@ border: 2px solid black;
 nav h2 {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     margin-left: 30%;
+}
+
+a[class=off] {
+    display:none;
 }
 /**********************************************************************************************************************************************************************
                                             Big phone/small browser dimensions
