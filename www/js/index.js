@@ -245,12 +245,16 @@ function loadPage(pagename, idder) {
         console.log("pagename = "+pagename);
         for(var i = 0; i < numTabs; i++) {
             var tabsSplit = tabs[i].querySelector("a").href.split("#");
+            document.querySelector("#back_button a").className = "off";
             if(tabsSplit[1] == pagename) {
                 tabs[i].className = "activetab";
             } else {
                 tabs[i].className = "";
             }           
-            document.querySelector("#back_button a").className = "off";
+            if(tabsSplit[1] == "index") {
+                drinkIndexDisplay();
+            }
+            
         }
 //        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
     }
@@ -309,18 +313,21 @@ function drinkIndexDisplay() {
                 var drinkindex = JSON.parse(request.responseText);
 
                 var drinkindex_list = document.createElement("ul");
-                for(var i = 0; drinkindex.Category.length; i++) {
-                    for(var j = 0; i < drinkindex.Category[i].Drinks.length; j++) {
+
+                for(var i = 0; i < drinkindex.Category.length; i++) {
+                    console.log(drinkindex.Category.length);
+                    console.log(drinkindex.Category[i].title);
+                    for(var j = 0; j < drinkindex.Category[i].Drinks.length; j++) {
                         var drinkindex_listing = document.createElement("li");
                         var drinkindex_a = document.createElement("a");
                         drinkindex_a.href="#drink_display"
 
                         drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
-                        drinkindex_a.innerHTML.setAttribute("data-role","pagelink");
+                        drinkindex_a.setAttribute("data-role","pagelink");
                         drinkindex_listing.appendChild(drinkindex_a);
-                        drinkindex_list.appendChild(drink_listing);
+                        drinkindex_list.appendChild(drinkindex_listing);
                     }
-                    
+                pages[1].appendChild(drinkindex_list);    
                 }          
             }
         }
