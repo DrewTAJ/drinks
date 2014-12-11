@@ -17,6 +17,7 @@ var onlineConnection;
 var drinkPOJOArray = [];
 var k;
 var networkState;
+var customDrinkKey;
 
 var app = {
 
@@ -392,10 +393,8 @@ function randomDrinkDisplay() {
             if(request.status == 200 || request.status == 0) {
 
                 console.log("In the RandomDrink request");
-//                console.log(request.responseText);
-                var drinkindex = JSON.parse(request.responseText);
 
-//                console.log("Category Length "+(drinkindex.Category.length - 1));
+                var drinkindex = JSON.parse(request.responseText);
 
                 var randomCategory = Math.round(Math.random() * ((drinkindex.Category.length - 1) + 0) + 0);
 
@@ -520,7 +519,6 @@ function saveDrink(ev) {
 
     if(drink_name_count == drink_ingredient_name.length && drink_name.value != "" && drink_recipe_count == drink_recipe_steps.length) {
 
-
         custom_drink_pojo = {
             "title" : drink_name,
             "picture" : imagevar,
@@ -601,6 +599,31 @@ function getFileReaderSuccess(fileEntry) {
     var user_drinks = JSON.parse(this.result);
 
     console.log(user_drinks);
+
+    var drink_selection = document.querySelector("#drink_selection");
+    drink_selection.innerHTML = "";
+
+    var user_drinks_list = document.createElement("ul");
+
+    for(var i = 0; i < user_drinks.length; i++) {
+        var user_drinks_listing = document.createElement("li");
+        var user_drinks_listing_a = document.createElement("a");
+        user_drinks_listing_a.href = "#drink_display";
+        user_drinks_listing_a.id = i;
+        user_drinks_listing.innerHTML = user_drinks[i].Name;
+
+        user_drinks_listing.appendChild(user_drinks_listing_a);
+        user_drinks_list.appendChild(user_drinks_listing);
+    }
+
+    drink_selection.appendChild(user_drinks_list);
+
+    var user_drink_listener = user_drinks_list.querySelectorAll("li a");
+
+    for(var i = 0; i < user_drink_listener.length; i++) {
+        user_drink_listener[i].addEventListener("touchend",customDrinkReader,false);
+    }
+
 }
 
 function getFileWriterSuccess(fileEntry) {
@@ -619,6 +642,78 @@ function getFileWriterSuccess(fileEntry) {
 
 
     },errorHandler);
+}
+
+function customDrinkReader(ev) {
+    ev.preventDefault();
+
+    customDrinkKey = ev.currentTarget.id;
+    fileSystem.root.getFile('userdrinks.json', {create: false}, customDrinkDisplay, errorHandler);
+
+}
+
+function customDrinkDisplay(ev) {
+
+    fileEntry.file();
+
+    var reader = new FileReader();
+
+    reader.onload() = function(e) {
+        console.log(this.result);
+    }
+
+    reader.readAsText(file);
+
+    var user_drinks = JSON.parse(this.result);
+
+    var c = customDrinkKey;
+
+    document.querySelector("#header_title").innerHTML = user_drinks[i].Name;
+
+    var drink_image = document.createElement("img");
+    if(user_drinks[i].picture == null) {
+        drink_image.src = "img/No-Icon.png";
+    } else {
+        drink_image.src = user_drinks[i].picture;
+    }
+
+    var drink_description = document.createElement("p");
+    if(user_drinks[i].picture == null) {
+        drink_description.innerHTML == ""
+    } else {
+        drink_description.innerHTML == user_drinks[i].description;
+    }
+
+    var drink_recipe = document.createElement("div");
+    drink_recipe.id = "recipe";
+
+    var drink_ingredients = document.createElement("ul");
+    for(var i = 0; i < user_drinks[i].ingredients; i++) {
+        var drink_ingredients_listing = document.createElement("li");
+        if(user_drinks[i].ingredients[i].Quantity == null) {
+            drink_ingredients_listing.innerHTML = user_drinks[i].ingredients[i].Name;
+        } else {
+            drink_ingredients_listing.innerHTML = user_drinks[i].ingredients[i].Quantity+" "+user_drinks[i].ingredients[i].Name;
+        }
+        drink_ingredients.appendChild(drink_ingredients_listing);
+    }
+
+    var drink_recipe_steps = document.createElement("ol");
+    for(var i = 0; i < user_drinks[i].recipe.length; i++) {
+        var drink_recipe_steps_listing = document.createElement("li");
+        drink_recipe_steps_listing.innerHTML = user_drinks[i].recipe[i];
+        drink_recipe_steps.appendChild(drink_recipe_steps_listing);
+    }   
+
+    drink_recipe.appendChild(drink_ingredients);
+    drink_recipe.appendChild(drink_recipe_steps);
+
+    var damaged_liver = document.querySelector("#drink_display");
+
+    damaged_liver.appendChild(drink_image);
+    damaged_liver.appendChild(drink_recipe);
+    damaged_liver.appendChild(drink_description);
+
 }
 
 function searchDrinks(ev) {
