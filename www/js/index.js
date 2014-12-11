@@ -238,6 +238,7 @@ function loadPage(pagename, idder) {
         for(var i = 0; i < numTabs; i++) {
             tabs[i].className = "";
         }
+        
         document.querySelector("#home_button").className = "activetab";
     } else  {
         console.log("pagename = "+pagename);
@@ -248,6 +249,7 @@ function loadPage(pagename, idder) {
             } else {
                 tabs[i].className = "";
             }           
+            document.querySelector("#back_button a").className = "off";
         }
 //        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
     }
@@ -290,6 +292,37 @@ function drinkSelectionDisplay() {
         }
     }
     request.send();
+}
+
+function drinkIndexDisplay() {
+
+    var request = new XMLHttpRequest();
+    request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);    
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200 || request.status == 0) {
+
+                console.log("IN onreadystatechange() with everything A OK!");
+                var drinkindex = JSON.parse(request.responseText);
+
+                var drinkindex_list = document.createElement("ul");
+                for(var i = 0; drinkindex.Category.length; i++) {
+                    for(var j = 0; i < drinkindex.Category[i].Drinks.length; j++) {
+                        var drinkindex_listing = document.createElement("li");
+                        var drinkindex_a = document.createElement("a");
+                        drinkindex_a.href="#drink_display"
+
+                        drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
+                        drinkindex_a.innerHTML.setAttribute("data-role","pagelink");
+                        drinkindex_listing.appendChild(drinkindex_a);
+                        drinkindex_list.appendChild(drink_listing);
+                    }
+                    
+                }          
+            }
+        }
+    }
+    request.send();    
 }
 
 function drinkDisplay(ev) {
