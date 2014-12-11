@@ -320,10 +320,13 @@ function drinkIndexDisplay() {
                     for(var j = 0; j < drinkindex.Category[i].Drinks.length; j++) {
                         var drinkindex_listing = document.createElement("li");
                         var drinkindex_a = document.createElement("a");
-                        drinkindex_a.href="#drink_display"
 
+                        drinkindex_a.href="#drink_display"
                         drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
                         drinkindex_a.setAttribute("data-role","pagelink");
+                        drinkindex_a.addEventListener("touchend",drinkDisplay,false);
+                        drinkindex_a.id = j;
+
                         drinkindex_listing.appendChild(drinkindex_a);
                         drinkindex_list.appendChild(drinkindex_listing);
                     }
@@ -340,6 +343,8 @@ function drinkDisplay(ev) {
 
     var damaged_liver = document.querySelector("#drink_display");
     damaged_liver.innerHTML = "";
+
+    console.log("k = "+k);
 
     var currentsource = ev.currentTarget.href;
     var currsplit = currentsource.split("#");
