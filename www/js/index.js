@@ -245,12 +245,16 @@ function loadPage(pagename, idder) {
         console.log("pagename = "+pagename);
         for(var i = 0; i < numTabs; i++) {
             var tabsSplit = tabs[i].querySelector("a").href.split("#");
+            document.querySelector("#back_button a").className = "off";
             if(tabsSplit[1] == pagename) {
                 tabs[i].className = "activetab";
             } else {
                 tabs[i].className = "";
             }           
-            document.querySelector("#back_button a").className = "off";
+            if(tabsSplit[1] == "index") {
+                drinkIndexDisplay();
+            }
+            
         }
 //        document.querySelector(atr).className = "activetab";//stores the active tab in a variable for later use
     }
@@ -316,7 +320,7 @@ function drinkIndexDisplay() {
                         drinkindex_a.href="#drink_display"
 
                         drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
-                        drinkindex_a.innerHTML.setAttribute("data-role","pagelink");
+                        drinkindex_a.setAttribute("data-role","pagelink");
                         drinkindex_listing.appendChild(drinkindex_a);
                         drinkindex_list.appendChild(drink_listing);
                     }
