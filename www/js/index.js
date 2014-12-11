@@ -302,6 +302,7 @@ function drinkSelectionDisplay() {
 function drinkIndexDisplay() {
 
     document.querySelector("#index").innerHTML = "";
+    k = null;
 
     var request = new XMLHttpRequest();
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);    
@@ -325,7 +326,7 @@ function drinkIndexDisplay() {
                         drinkindex_a.innerHTML = drinkindex.Category[i].Drinks[j].Name;
                         drinkindex_a.setAttribute("data-role","pagelink");
                         drinkindex_a.addEventListener("touchend",drinkDisplay,false);
-                        drinkindex_a.id = j;
+                        drinkindex_a.id = i+","+j;
 
                         drinkindex_listing.appendChild(drinkindex_a);
                         drinkindex_list.appendChild(drinkindex_listing);
@@ -364,7 +365,15 @@ function drinkDisplay(ev) {
         links[i].className = " ";
     }
 
-    c = ev.currentTarget.id; 
+    if(k == null || k == "undefined") {
+        var splitter = ev.currentTarget.id.split(",");
+        k = splitter[0];
+        c = splitter[1];
+    } else {
+        c = ev.currentTarget.id; 
+    }
+
+    console.log(k+" "+c);
 
     var request = new XMLHttpRequest();
     console.log("AFTER request");
