@@ -240,6 +240,7 @@ function loadPage(pagename, idder) {
         }
         
         document.querySelector("#home_button").className = "activetab";
+        document.querySelector("#back_button a").className = "off";
     } else  {
         console.log("pagename = "+pagename);
         for(var i = 0; i < numTabs; i++) {
@@ -295,6 +296,8 @@ function drinkSelectionDisplay() {
 }
 
 function drinkIndexDisplay() {
+
+    document.querySelector("#index").innerHTML = "";
 
     var request = new XMLHttpRequest();
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);    
