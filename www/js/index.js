@@ -234,8 +234,13 @@ function loadPage(pagename, idder) {
     }
 
     if(pagename == "home") {
+        console.log("pagename = home");
+        for(var i = 0; i < numTabs; i++) {
+            tabs[i].className = "";
+        }
         document.querySelector("#home_button").className = "activetab";
     } else  {
+        console.log("pagename = "+pagename);
         for(var i = 0; i < numTabs; i++) {
             var tabsSplit = tabs[i].querySelector("a").href.split("#");
             if(tabsSplit[1] == pagename) {
