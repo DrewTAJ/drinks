@@ -192,8 +192,8 @@ function loadPage(pagename, idder) {
         case "home" :
             header_title.innerHTML="Home";
             break;
-        case "favourite" :
-            header_title.innerHTML="Favourite";
+        case "index" :
+            header_title.innerHTML="Index";
             break;
         case "search":
             header_title.innerHTML="Search";
