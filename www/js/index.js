@@ -767,8 +767,6 @@ function getFileWriterSuccess(fileEntry) {
             console.log("Write failed: " + e.toString());
         };
 
-        
-
     },errorHandler);
 }
 
