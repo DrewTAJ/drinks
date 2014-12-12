@@ -18,7 +18,8 @@ h1 {
 }
 
 .wrapper section {
-    padding-top:95px;
+    padding-top:35px;
+    padding-bottom:23%;
 }
 
 .active {
@@ -37,6 +38,11 @@ h1 {
     display:block;
 }
 
+label {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+}
 
 /****************************
         Header
@@ -104,7 +110,6 @@ width: 100%;
     position:fixed;
     width:100%;
     bottom:0;
-    height: 95px;
 }
 
 #navbar ul {
@@ -123,7 +128,7 @@ width: 100%;
 }
 
 #navbar ul li a {
-    padding-top:20px;
+    padding-top:44px;
 }
 a[data-role=pagelink] {
     display:block;
@@ -194,7 +199,7 @@ a {
 }
 
 #navbar ul li a {
-    margin-top: 40px;
+/*    margin-top: 40px;*/
 }
 /****************************
         Home Page
@@ -202,8 +207,8 @@ a {
 #home {
     background-color: #faa3b8;
     height: 100%;
-    padding-bottom: 65%;
-}
+/*    padding-bottom: 65%;
+*/}
 #home a {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -289,7 +294,7 @@ input[type=text]
 	border: 2px solid black;
 }
 
-button
+button, input[type=submit]
 {
  border-radius: 10px;
 height: 60px;
@@ -333,6 +338,10 @@ nav h2 {
 a[class=off] {
     display:none;
 }
+
+a[class=on] {
+    display:block;
+}
 /**********************************************************************************************************************************************************************
                                             Big phone/small browser dimensions
 **********************************************************************************************************************************************************************/
@@ -355,8 +364,12 @@ a[class=off] {
 **********************************************************************************************************************************************************************/
 @media all and (max-width:350px) {
 
+#header_title {
+    font-size: 20px;
+} 
+
 #navbar ul li { 
-    height: 90px;
+    height: 65px;
     width:24%;
     float:left;
     clear:none;
@@ -367,50 +380,60 @@ a[class=off] {
 
 #navbar ul li:first-child {
     background:url("../img/homeNotSelect.png") no-repeat center;
-    background-size:75%, 35%;
+/*    background-size:75%, 35%;*/
     border-right: 1px solid black;
+    background-position: 50%,0%;
 }
 
 #navbar ul li:nth-child(2) {
     background:url("../img/favouriteNotSelect.png") no-repeat center;
     border-right: 1px solid black;
-    background-size:75%, 35%;
+/*    background-size:75%, 35%;*/
 }
 
 #navbar ul li:nth-child(3) {
     background:url("../img/searchNotSelect.png") no-repeat center;
     border-right: 1px solid black;
-    background-size:75%, 35%;
+/*    background-size:75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li:last-child {
     background:url("../img/settingsNotSelect.png") no-repeat center;
-    background-size:75%, 35%;
+/*    background-size:75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li.activetab:first-child  {
     background:url("../img/homeSelect.png") no-repeat center;
-	background-size: 75%, 35%;
+/*	background-size: 75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li.activetab:nth-child(2)  {
     background:url("../img/favouriteSelect.png") no-repeat center;
-	background-size: 75%, 35%;
+/*	background-size: 75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li.activetab:nth-child(3)   {
     background:url("../img/searchSelect.png") no-repeat center;
-	background-size: 75%, 35%;
+/*	background-size: 75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li.activetab:last-child  {
     background:url("../img/settingsSelect.png") no-repeat center;
-	background-size: 75%, 35%;
+/*	background-size: 75%, 35%;*/
+background-position: 50%,0%;
 }
 
 #navbar ul li a {
-margin-top: 50px;
-font-size: 16px;
+/*    margin-top: 50px;*/
+    font-size: 16px;
 }
 
+#drink_display {
+    font-size:20px;
+}
 }
