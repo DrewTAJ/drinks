@@ -113,16 +113,15 @@ function loadPage(pagename, idder) {
         //Saves the history of the screens viewed in the Screens array                                           
     }
 
+    console.log("idder = "+idder);
     
+    var asyncFILE = false;
+
     if(pagename == "drink_selection") {
-        console.log("bullshit "+pagename)
         var lister = document.querySelector("#"+pagename+" ul");
 
         var cateback = false;
-        
-        console.log("Before FOR LOOP");
-        console.log("idder = "+idder);
-        switch(idder) {
+                switch(idder) {
             case "0":
                 k = 0;
                 cateback = true;
@@ -154,7 +153,7 @@ function loadPage(pagename, idder) {
         }
     }
 
-    if(idder == "My") {
+    if(idder == "true") {
         var header_add = document.querySelectorAll("#header2 div");
         for(var i = 0; i < header_add.length; i++) {
             if(header_add[i].id = "add_button") {
@@ -163,8 +162,11 @@ function loadPage(pagename, idder) {
                 header_add[i].className = "off";
             }
         }
+        console.log("about to display user drinks");
+        asyncFILE = true;
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 5*1024*1024, onFileSuccess, errorHandler);
-    } else if(idder == "Random") {
+    } else if(idder == "false") {
+
         randomDrinkDisplay();
     }
 
@@ -247,7 +249,7 @@ function loadPage(pagename, idder) {
             } else {
                 tabs[i].className = "";
             }           
-            if(tabsSplit[1] == "index") {
+            if(tabsSplit[1] == "index" && asyncFILE == false) {
                 drinkIndexDisplay();
             }
             
@@ -259,6 +261,9 @@ function loadPage(pagename, idder) {
 function drinkSelectionDisplay(love) {
     var request = new XMLHttpRequest();
     console.log("AFTER request in drinkSelectionDisplay() k = "+k);
+
+//    document.querySelector("")
+
     request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
     request.onreadystatechange = function() {
         if(request.readyState == 4) {
@@ -637,14 +642,16 @@ function cameraError(error) {
 }
 
 function onFileSuccess(fileSystem) {
+    console.log("in onFileSuccess()");
     if(writer == true) {
-        fileSystem.root.getFile('userdrinks.json', {create: false}, getFileWriterSuccess, errorHandler);
+        fileSystem.root.getFile('userdrinks.json', {create: true, exclusive: false}, getFileWriterSuccess, errorHandler);
     } else {
-        fileSystem.root.getFile('userdrinks.json', {create: false}, getFileReaderSuccess, errorHandler);
+        fileSystem.root.getFile('userdrinks.json', {create: true, exclusive: false}, getFileReaderSuccess, errorHandler);
     }
 }
 
 function getFileReaderSuccess(fileEntry) {
+    console.log("in getFileReaderSuccess(fileEntry)");
 
     fileEntry.file();
 
@@ -653,6 +660,7 @@ function getFileReaderSuccess(fileEntry) {
     reader.onload() = function(e) {
         console.log(this.result);
     }
+
 
     reader.readAsText(file);
 
@@ -665,25 +673,29 @@ function getFileReaderSuccess(fileEntry) {
 
     var user_drinks_list = document.createElement("ul");
 
-    for(var i = 0; i < user_drinks.length; i++) {
+    if(user_drinks.length) {
         var user_drinks_listing = document.createElement("li");
-        var user_drinks_listing_a = document.createElement("a");
-        user_drinks_listing_a.href = "#drink_display";
-        user_drinks_listing_a.id = i;
-        user_drinks_listing.innerHTML = user_drinks[i].Name;
-
-        user_drinks_listing.appendChild(user_drinks_listing_a);
+        user_drinks_listing.innerHTML = "no results found";
         user_drinks_list.appendChild(user_drinks_listing);
-    }
+         drink_selection.appendChild(user_drinks_list);
+    } else {
+        for(var i = 0; i < user_drinks.length; i++) {
+            var user_drinks_listing = document.createElement("li");
+            var user_drinks_listing_a = document.createElement("a");
+            user_drinks_listing_a.href = "#drink_display";
+            user_drinks_listing_a.id = i;
+            user_drinks_listing.innerHTML = user_drinks[i].Name;
 
-    drink_selection.appendChild(user_drinks_list);
+            user_drinks_listing.appendChild(user_drinks_listing_a);
+            user_drinks_list.appendChild(user_drinks_listing);
+        }
+         drink_selection.appendChild(user_drinks_list);
+        var user_drink_listener = user_drinks_list.querySelectorAll("li a");
 
-    var user_drink_listener = user_drinks_list.querySelectorAll("li a");
-
-    for(var i = 0; i < user_drink_listener.length; i++) {
-        user_drink_listener[i].addEventListener("touchend",customDrinkReader,false);
-    }
-
+        for(var i = 0; i < user_drink_listener.length; i++) {
+            user_drink_listener[i].addEventListener("touchend",customDrinkReader,false);
+        }        
+    }   
 }
 
 function getFileWriterSuccess(fileEntry) {
@@ -779,39 +791,55 @@ function customDrinkDisplay(ev) {
 function searchDrinks(ev) {
     ev.preventDefault();
 
-    var searchValue = document.querySelector(".searchTxt").value;
-    var searchValueList = document.querySelector("#search_results ul");
+    var request = new XMLHttpRequest();
+    console.log("AFTER request");
+    request.open("GET","https://raw.githubusercontent.com/Sparkdragon911/drinks/master/www/js/drinks.json",true);
+    request.onreadystatechange = function() {
+        if(request.readyState == 4) {
+            if(request.status == 200 || request.status == 0) {
+                var drinkindex = JSON.parse(request.responseText);
 
-    var searchResults = [];
+                var searchValue = document.querySelector(".searchTxt").value;
+                var searchValueListDiv = document.querySelector("#search_results");
+                var searchValueList = document.createElement("ul");
 
-    for(var i = 0; i < drinkindex.Category.length; i++) {
-        for(var j = 0; j < drinkindex.Category[i].length; j++) {
-            var searchResult = drinkindex.Category[i].Drinks[j].Name;
-            
-            if(searchValue.toUpperCase() == searchResult.toUpperCase()) {
-                searchResults.push(searchResult);
+                var searchResults = [];
+
+                for(var i = 0; i < drinkindex.Category.length; i++) {
+                    for(var j = 0; j < drinkindex.Category[i].length; j++) {
+                        var searchResult = drinkindex.Category[i].Drinks[j].Name;
+                        
+                        if(searchValue.toUpperCase() == searchResult.toUpperCase()) {
+                            searchResults.push(searchResult);
+                        }
+                    }
+                }
+
+                if(searchResults.length > 0) {
+                    for(var i = 0; i < searchResults.length; i++) {
+                        var resultLI = document.createElement("li");
+                        var resultA = document.createElement("a");
+                        resultA.href="#drink_display";
+                        resultA.innerHTML = searchResults[i];       
+                        resultA.setAttribute("data-role","pagelink");
+
+                        resultLI.appendChild(resultA);
+                        searchValueList.appendChild(resultLI);     
+                    }
+                } else {
+                    var resultLI = document.createElement("li");
+                    var resultP = document.createElement("p");
+                    resultP.innerHTML = "No Results";        
+                    resultLI.appendChild(resultP);
+                    searchValueList.appendChild(resultLI);
+                }
+                searchValueListDiv.appendChild(searchValueList);
             }
         }
     }
+    request.send();
 
-    if(searchResults.length > 0) {
-        for(var i = 0; i < searchResults.length; i++) {
-            var resultLI = document.createElement("li");
-            var resultA = document.createElement("a");
-            resultA.href="#drink_display";
-            resultA.innerHTML = searchResults[i];       
-            resultA.setAttribute("data-role","pagelink");
 
-            resultLI.appendChild(resultA);
-            searchValueList.appendChild(resultLI);     
-        }
-    } else {
-        var resultLI = document.createElement("li");
-        var resultP = document.createElement("p");
-        resultP.innerHTML = "No Results";        
-        resultLI.appendChild(resultP);
-        searchValueList.appendChild(resultLI);
-    }
 }
 
 function errorHandler(e) {
